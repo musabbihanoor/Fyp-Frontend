@@ -1,0 +1,482 @@
+.timeline .post {
+  margin-bottom: 30px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.timeline .post .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.timeline .post .user-info img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.timeline .post .user-info h1 {
+  font-size: 1rem;
+  color: #333434;
+  margin: 0;
+}
+
+.timeline .post .user-info p {
+  margin: 0;
+  font-size: 10px;
+}
+
+.timeline .post .inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0 10px 20px;
+}
+
+.timeline .post .post-options {
+  width: 20%;
+}
+
+.timeline .post .post-options button {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #d5d8dd;
+  background: #fff;
+  color: #757575;
+  transition: all 0.5s ease-in;
+}
+
+.timeline .post .post-items form {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline .post .post-items form textarea {
+  width: 80%;
+  border: 1px solid #ccc;
+  align-self: center;
+  color: #222222;
+  padding: 10px;
+  margin-top: 10px;
+  height: inherit;
+  resize: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
+
+.timeline .post .post-items form textarea:focus {
+  outline: none;
+  border: 1px solid #40a4d8;
+}
+
+.timeline .post .post-items form div {
+  align-self: center;
+}
+
+.timeline .post .post-items form button.update {
+  background-color: #40a4d8;
+  width: 80px;
+  color: #fff;
+  margin: 10px 0;
+  align-self: center;
+  cursor: pointer;
+}
+
+.timeline .post .post-items form button.cancel {
+  background-color: #db3838;
+  width: 40px;
+  color: #fff;
+  margin: 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.timeline .post .post-items {
+  color: #333434;
+}
+
+.timeline .post .post-items img {
+  width: 100%;
+}
+
+.timeline .post .post-items p {
+  padding: 10px;
+  margin: 0;
+}
+
+.education {
+  width: 700px !important;
+  margin-top: 100px !important;
+  height: 70vh !important;
+}
+
+.education .item {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.education p {
+  margin: 5px 0;
+}
+
+.education p span {
+  color: #303f9f;
+}
+
+.education .options {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.education .item button {
+  padding: 5px;
+  min-width: auto;
+  margin-left: 5px;
+}
+
+.date-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.date-input label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+  background-color: #fff;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.date-input input[type="date"] {
+  width: 200px;
+  height: 55px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #d5d5d5;
+  padding: 0 10px;
+  font-size: 1rem;
+}
+
+.education .date-input input[type="date"] {
+  width: 280px;
+  margin-right: 10px;
+}
+
+.profile {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+}
+
+.profile .quote,
+.profile .about {
+  background-color: #fff;
+  margin: 0 15px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  position: relative;
+}
+
+.profile .quote p {
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.profile .quote h3,
+.profile-friends h3,
+.about-friends h3,
+.profile-photos h3,
+.profile h3 {
+  margin: 0 10px 10px 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile .about p {
+  display: flex;
+  font-size: 14px;
+}
+
+.profile .about .MuiSvgIcon-root {
+  margin-right: 10px;
+}
+
+.profile .quote h6 {
+  text-align: end;
+  margin: 10px 0 0 0;
+  font-size: 10px;
+}
+
+.profile button.option {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  color: #ccc;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+.profile button.option:hover {
+  color: #333434;
+  background-color: #eee;
+}
+
+.profile-head {
+  background-color: #fff;
+  margin-bottom: 1px;
+  padding-bottom: 10px;
+}
+
+.profile-head h2 {
+  margin-bottom: 10px;
+}
+
+.profile-head button {
+  font-size: 12px;
+  padding: 0;
+}
+
+.profile-friends,
+.about-friends,
+.profile-photos {
+  background-color: #fff;
+  margin: 15px;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.profile-friends .item {
+  height: 180px;
+}
+
+.profile-friends .item img {
+  width: 95%;
+  height: 80%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile-photos .item img {
+  width: 95%;
+  height: 95%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile-friends .item p {
+  margin: 5px 0;
+}
+
+.profile .nav {
+  display: flex;
+  background-color: #fff;
+  padding: 3px 20px 0;
+}
+
+.profile .nav button {
+  background-color: transparent;
+  border: none;
+  margin-right: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border-bottom: 3px solid #fff;
+}
+
+.profile .nav button:hover {
+  background-color: #f2f2f2;
+}
+
+.profile .nav button.selected {
+  border-bottom: 3px solid #f50057;
+  border-radius: 5px 5px 0 0;
+  color: #f50057;
+}
+
+.profile .nav button.selected:hover {
+  background-color: #fff;
+}
+
+.profile .about {
+  margin-top: 20px;
+}
+
+.profile .about span {
+  display: flex;
+}
+
+.profile .about .menu {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.profile .about .menu button {
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.profile .about .menu button.selected {
+  color: #f50057;
+  background-color: #f5ebee;
+}
+
+.profile .about .menu button:hover {
+  background-color: #f2f2f2;
+}
+
+.profile .about .detail {
+  flex: 1;
+}
+
+.profile .about .overview,
+.profile .about .work {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.profile .about .overview .item {
+  width: 30%;
+  background-color: #f2f2f2;
+  margin: 0 10px 10px 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile .about .overview .item .MuiSvgIcon-root {
+  font-size: 4rem;
+  color: #757575;
+}
+
+.profile .about h6,
+.profile .about p,
+.profile .about h4 {
+  margin: 5px 0;
+}
+
+.profile .about .work {
+  justify-content: flex-start;
+}
+
+.profile .about .work .item {
+  border: 1px solid #eee;
+  width: 45%;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.profile .about .work h6 {
+  text-align: end;
+  margin-top: 50px;
+}
+
+.profile .about-friends span {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile .about-friends span a {
+  color: #40a4d8;
+  margin-left: 10px;
+}
+
+.profile .about-friends .list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile .about-friends .list .item {
+  width: 47%;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  margin: 5px;
+}
+
+.profile .about-friends .list .item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.verse-list {
+  margin-top: 100px !important;
+  width: 500px !important;
+  height: 80vh !important;
+  overflow-y: auto;
+}
+
+.verse-list form {
+  display: flex;
+}
+
+.verse-list form input {
+  flex: 1;
+  margin-right: 10px;
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.verse-list button {
+  border: none;
+  background-color: #f5ebee;
+  color: #000;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.verse-list button:hover {
+  background-color: #f50057;
+  color: #fff;
+}
+
+.verse-list button.item {
+  background-color: #fff;
+  margin: 5px 0;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+}
+
+.verse-list button.item:hover {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+@media screen and (max-width: 750px) {
+  .profile h2.name {
+    text-align: center;
+  }
+}

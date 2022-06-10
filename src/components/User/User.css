@@ -1,0 +1,142 @@
+.user {
+  padding: 50px;
+  height: 87vh;
+}
+
+.user .content {
+  width: 500px;
+  height: 80vh;
+  /* margin: 50px 0 0 50px; */
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: -1px -1px 14px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  color: #fff;
+  backdrop-filter: blur(50px);
+}
+
+.user .content img {
+  width: 80%;
+  margin-top: 40px;
+}
+
+.user .content form {
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.user form h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: 100;
+}
+
+.user form p {
+  font-size: 13px;
+}
+
+.user .content form input[type="text"],
+.user .content form input[type="password"] {
+  background-color: #2d3c5b !important;
+  width: 90%;
+  margin-bottom: 15px;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 20px;
+  height: 20px;
+  box-shadow: -1px 2px 17px -9px rgba(0, 0, 0, 0.75);
+}
+
+.user .content form input[type="text"]::placeholder,
+.user .content form input[type="password"]::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.user .content span {
+  /* display: flex;
+  align-items: center; */
+  position: relative;
+}
+
+.user .content span:last-of-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user .content span i {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.user .content form button {
+  width: 60%;
+  align-self: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-radius: 20px;
+  border: none;
+  color: #162f4e;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: -1px 2px 17px -5px rgba(0, 0, 0, 0.75);
+  transition: all 0.5s ease;
+}
+
+.user .content form button a {
+  color: #162f4e;
+}
+
+.user .content form button:hover {
+  background-color: #2d3c5b;
+  color: #fff;
+}
+
+.user h4 {
+  font-size: 11px;
+}
+
+.user h3 {
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+}
+
+.user a {
+  color: #fff;
+}
+
+.verify {
+  padding: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verify button {
+  margin: 0 10px;
+}
+
+.changeEmail {
+  margin-top: 120px !important;
+  width: 400px !important;
+}
+
+.changeEmail form {
+  display: flex;
+  flex-direction: column;
+}
+
+.changeEmail button {
+  align-self: flex-end;
+  margin-top: 10px;
+}

@@ -1,0 +1,170 @@
+.App {
+<<<<<<< HEAD
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+=======
+  display: flex;
+}
+
+.options {
+  width: 20%;
+}
+
+.timeline {
+  width: 40%;
+  height: 100vh;
+  background-color: #fbfcff;
+  padding: 70px;
+}
+
+.timeline .search input {
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #d5d8dd;
+  padding: 7px;
+  font-weight: 600;
+  color: #757575;
+}
+
+.timeline form input[type="text"]:focus {
+  /* box-shadow: 0 0 5pt 2pt #d3d3d3; */
+  box-shadow: 0px 15px 10px -15px #111;
+  outline-width: 0px;
+}
+
+.timeline form button {
+  background-color: transparent;
+  border: none;
+  color: #757575;
+  border-bottom: 1px solid #d5d8dd;
+  line-height: 30px;
+}
+
+.timeline .add-post,
+.timeline .post {
+  margin-top: 50px;
+}
+
+.timeline .add-post .user-info,
+.timeline .post .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.timeline .add-post .user-info img,
+.timeline .post .user-info img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.timeline .add-post .user-info h1,
+.timeline .post .user-info h1 {
+  font-size: 20px;
+  color: #333434;
+}
+
+.timeline .add-post form {
+  margin-top: 10px;
+}
+
+.timeline .add-post form input[type="text"] {
+  border: 1px solid #d5d8dd;
+  height: 20px;
+  width: 70%;
+  border-radius: 20px;
+  margin-right: 10px;
+  padding: 10px;
+  color: #333434;
+}
+
+.timeline .add-post form input[type="file"],
+.timeline .add-post form input[type="submit"] {
+  display: none;
+}
+
+.timeline .add-post form i {
+  padding: 12px;
+  width: 15px;
+  border: 1px solid #d5d8dd;
+  background-color: #fff;
+  border-radius: 20px;
+  color: #757575;
+  margin-right: 10px;
+}
+
+.timeline .add-post form i:hover,
+.timeline .post .post-options button:hover {
+  box-shadow: 0 0 5pt 2pt #d3d3d3;
+}
+
+.timeline .post .inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timeline .post .post-options {
+  width: 20%;
+}
+
+.timeline .post .post-options button {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #d5d8dd;
+  background: #fff;
+  color: #757575;
+}
+
+.timeline .post .post-items {
+  color: #333434;
+  background-color: #fff;
+  border: 1px solid #d5d8dd;
+}
+
+.timeline .post .post-items img {
+  width: 100%;
+}
+
+.timeline .post .post-items p {
+  padding: 10px;
+  margin: 0;
+>>>>>>> master
+}
