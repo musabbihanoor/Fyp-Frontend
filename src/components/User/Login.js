@@ -32,46 +32,45 @@ const Login = ({ setRegister, login, auth: { error }, history }) => {
           maxWidth: 400,
           minWidth: 300,
           marginTop: 100,
-        }}
-      >
-        <Grid container justify='center'>
+        }}>
+        <Grid container justify="center">
           <img
-            src='https://www.pngfind.com/pngs/b/527-5272118_bismillah-calligraphy-png.png'
+            src="https://www.pngfind.com/pngs/b/527-5272118_bismillah-calligraphy-png.png"
             width={100}
-            alt='logo'
-          ></img>
+            alt="logo"></img>
         </Grid>
         <TextField
           error={error.username}
           id={error.username ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.username && error.username[0]}
-          label='Username'
-          variant='outlined'
-          margin='normal'
+          label="Username"
+          variant="outlined"
+          margin="normal"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <AccountCircle color='primary' />
+              <InputAdornment position="start">
+                <AccountCircle color="primary" />
               </InputAdornment>
             ),
           }}
         />
 
         <TextField
+          type="password"
           error={error.password}
           id={error.password ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.password && error.password[0]}
-          label='Password'
-          variant='outlined'
-          margin='normal'
+          label="Password"
+          variant="outlined"
+          margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <LockRounded color='primary' />
+              <InputAdornment position="start">
+                <LockRounded color="primary" />
               </InputAdornment>
             ),
           }}
@@ -85,12 +84,11 @@ const Login = ({ setRegister, login, auth: { error }, history }) => {
 
         <div style={{ height: 20 }}>
           <Button
-            color='primary'
-            width='100%'
-            variant='contained'
-            href='/timeline'
-            onClick={(e) => onSubmit(e)}
-          >
+            color="primary"
+            width="100%"
+            variant="contained"
+            href="/timeline"
+            onClick={(e) => onSubmit(e)}>
             Login
           </Button>
         </div>
@@ -100,12 +98,12 @@ const Login = ({ setRegister, login, auth: { error }, history }) => {
         </div>
       </div>
       <div>
-        <Grid container justify='center' spacing={2}>
+        <Grid container justify="center" spacing={2}>
           <Grid item>
-            <Button color='primary'>Go to community page</Button>
+            <Button color="primary">Go to community page</Button>
           </Grid>
           <Grid item>
-            <Button variant='outlined'>Forgot password?</Button>
+            <Button variant="outlined">Forgot password?</Button>
           </Grid>
         </Grid>
       </div>

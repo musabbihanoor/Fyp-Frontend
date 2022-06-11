@@ -202,6 +202,7 @@ const Register = ({ setRegister, auth: { error }, register }) => {
         </FormControl>
 
         <TextField
+          type="password"
           error={error.password}
           id={error.password ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.password && error.password[0]}
@@ -220,6 +221,7 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           }}
         />
         <TextField
+          type="password"
           error={error.password2}
           id={error.password2 ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.password2 && error.password2[0]}

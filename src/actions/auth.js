@@ -53,7 +53,6 @@ export const login = (username, password) => async (dispatch) => {
       payload: res.data,
     });
 
-    console.log(res);
     dispatch(loadUser());
     return res;
   } catch (err) {
@@ -84,9 +83,8 @@ export const register = (formData) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
+    dispatch(loadUser());
 
-    console.log(res.data);
-    // dispatch(loadUser());
     return res;
   } catch (err) {
     dispatch({
@@ -112,6 +110,7 @@ export const verifyEmail = () => async (dispatch) => {
 
   try {
     const res = await axios.post(`${BASE_URL}/account/verifyemail/`);
+
     return res;
   } catch (err) {
     return err;
@@ -119,7 +118,7 @@ export const verifyEmail = () => async (dispatch) => {
 };
 
 // confirm email
-export const confirmEmail = (data) => async (dispatch) => {
+export const confirmEmail = (data, history) => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   } else {
@@ -136,6 +135,8 @@ export const confirmEmail = (data) => async (dispatch) => {
       data,
       config,
     );
+
+    dispatch(loadUser());
     return res;
   } catch (err) {
     return err;

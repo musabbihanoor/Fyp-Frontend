@@ -232,7 +232,7 @@ const Hadees = ({ x, reference, setRef, searchText2 }) => {
                 referencing(x);
                 setAdded(!added);
               }}>
-              <i className="fas fa-plus"></i>{" "}
+              <i className={`fas fa-${added ? "times" : "plus"}`}></i>{" "}
               {added ? "Remove" : "Add as a Reference"}
             </button>
           </div>

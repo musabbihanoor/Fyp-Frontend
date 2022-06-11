@@ -36,7 +36,7 @@ const VerifyEmail = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    confirmEmail({ code: code }).then((res) => console.log(res));
+    confirmEmail({ code: code }, history).then((res) => console.log(res));
   };
 
   return (
@@ -59,12 +59,25 @@ const VerifyEmail = ({
                   setValue(newValue);
                 }}
               /> */}
-              <input value={code} onChange={(e) => setCode(e.target.value)} />
+              <input
+                className="verify"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
             </div>
           )}
           <div>
+            {sent && (
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={(e) => onSubmit(e)}>
+                Submit
+              </Button>
+            )}
+
             <Button
-              variant="contained"
+              variant={sent ? "outlined" : "contained"}
               color="secondary"
               onClick={() => {
                 setSent(true);
@@ -78,15 +91,6 @@ const VerifyEmail = ({
                 variant="outlined"
                 onClick={() => setChange(true)}>
                 Change email
-              </Button>
-            )}
-
-            {sent && (
-              <Button
-                color="primary"
-                variant="outlined"
-                onClick={(e) => onSubmit(e)}>
-                Upload
               </Button>
             )}
           </div>

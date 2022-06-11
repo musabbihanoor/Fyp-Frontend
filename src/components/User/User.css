@@ -140,3 +140,13 @@
   align-self: flex-end;
   margin-top: 10px;
 }
+
+input.verify {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+}
