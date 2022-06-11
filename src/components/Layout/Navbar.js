@@ -140,45 +140,76 @@ const Navbar = ({
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
+      {location.pathname === "/timeline" && (
+        <>
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit">
+              <Badge color="error">
+                <Home
+                  color={nav === 1 ? "secondary" : "inherit"}
+                  onClick={() => setNav(1)}
+                />
+              </Badge>
+            </IconButton>
+            <p>Home</p>
+          </MenuItem>
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit">
+              <Badge color="error">
+                <Group
+                  color={nav === 2 ? "secondary" : "inherit"}
+                  onClick={() => setNav(2)}
+                />
+              </Badge>
+            </IconButton>
+            <p>Friends</p>
+          </MenuItem>
+        </>
+      )}
+
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge color="error">
-            <Home />
-          </Badge>
-        </IconButton>
-        <p>Home</p>
+        <Link
+          to={{ pathname: "/profile", state: { user: user } }}
+          style={{ display: "flex" }}>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit">
+            <Badge color="error">
+              <AccountCircle
+                color={
+                  location.pathname === "/profile" ? "secondary" : "inherit"
+                }
+              />
+            </Badge>
+          </IconButton>
+          <p>Profile</p>
+        </Link>
       </MenuItem>
 
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge color="error">
-            <Group />
-          </Badge>
-        </IconButton>
-        <p>Friends</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit">
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <Link to={{ pathname: "/profile", state: { user: user } }}>
-          Profile
+        <Link to="/profile/setting" style={{ display: "flex" }}>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit">
+            <Badge color="error">
+              <Settings
+                color={
+                  location.pathname === "/profile/setting"
+                    ? "secondary"
+                    : "inherit"
+                }
+              />
+            </Badge>
+          </IconButton>
+          <p>Setting</p>
         </Link>
       </MenuItem>
     </Menu>
@@ -205,15 +236,6 @@ const Navbar = ({
                 sx={{ display: { xs: "none", sm: "block" } }}>
                 <Link to="/timeline">NIZAM E ILAHI</Link>
               </Typography>
-              {/* <Search style={{ paddingLeft: "40px" }}>
-                <SearchIconWrapper>
-                  <SearchIcon style={{ marginLeft: "-60px" }} />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder='Search…'
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search> */}
               <Box sx={{ flexGrow: 1 }} />
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 {location.pathname === "/timeline" && (
@@ -256,27 +278,6 @@ const Navbar = ({
                     <Settings />
                   </IconButton>
                 </Link>
-
-                {/* <IconButton
-                  size='large'
-                  aria-label='show 17 new notifications'
-                  color='inherit'
-                >
-                  <Badge badgeContent={17} color='error'>
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton> */}
-                {/* <IconButton
-                  size='large'
-                  edge='end'
-                  aria-label='account of current user'
-                  aria-controls={menuId}
-                  aria-haspopup='true'
-                  onClick={handleProfileMenuOpen}
-                  color='inherit'
-                >
-                  <AccountCircle />
-                </IconButton> */}
               </Box>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
                 <IconButton

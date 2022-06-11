@@ -475,6 +475,27 @@
   color: #000;
 }
 
+@media screen and (max-width: 1000px) {
+  .profile .about .overview .item {
+    width: 47%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .profile-post-right {
+    display: none;
+  }
+
+  .profile-post {
+    justify-content: center;
+  }
+
+  .profile-post-left {
+    max-width: 80% !important;
+    flex-basis: 80% !important;
+  }
+}
+
 @media screen and (max-width: 750px) {
   .profile h2.name {
     text-align: center;

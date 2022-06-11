@@ -7,8 +7,8 @@ const ProfilePosts = ({ profile, getProfile, setShowVerse, setLoading }) => {
   const [data, setData] = useState([]);
 
   return (
-    <Grid container style={{ marginTop: 50 }}>
-      <Grid item xs={5}>
+    <Grid container style={{ marginTop: 50 }} className="profile-post">
+      <Grid item xs={5} className="profile-post-right">
         <div className="quote">
           <h3>Verse of the day</h3>
           <button
@@ -76,7 +76,7 @@ const ProfilePosts = ({ profile, getProfile, setShowVerse, setLoading }) => {
           </Grid>
         </div>
       </Grid>
-      <Grid item xs={7}>
+      <Grid item xs={7} className="profile-post-left">
         <Posts userid={profile.id} data={data} setData={setData} />
       </Grid>
     </Grid>

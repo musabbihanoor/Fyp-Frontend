@@ -49,7 +49,11 @@ const Timeline = ({
               }}>
               {profile && <Menu user={user} setNav={setNav} />}
             </Grid>
-            <Grid item xs={6} style={{ margin: "0 auto" }}>
+            <Grid
+              item
+              xs={6}
+              className="timeline-main"
+              style={{ margin: "0 auto" }}>
               {nav === 1 && (
                 <>
                   {profile && (
@@ -68,6 +72,7 @@ const Timeline = ({
             <Grid
               item
               xs={3}
+              className="right-timeline"
               style={{
                 position: "fixed",
                 height: "100vh",
