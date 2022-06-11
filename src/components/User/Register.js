@@ -76,24 +76,23 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           minWidth: 300,
           marginTop: 20,
           marginBottom: 20,
-        }}
-      >
+        }}>
         <h1>Sign up</h1>
 
         <TextField
           error={error.name}
           id={error.name ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.name && error.name[0]}
-          label='Name'
-          variant='outlined'
-          margin='normal'
-          name='name'
+          label="Name"
+          variant="outlined"
+          margin="normal"
+          name="name"
           value={name}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <AccountCircle color='primary' />
+              <InputAdornment position="start">
+                <AccountCircle color="primary" />
               </InputAdornment>
             ),
           }}
@@ -103,16 +102,16 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           error={error.username}
           id={error.username ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.username && error.username[0]}
-          label='Username'
-          variant='outlined'
-          margin='normal'
-          name='username'
+          label="Username"
+          variant="outlined"
+          margin="normal"
+          name="username"
           value={username}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <AccountCircle color='primary' />
+              <InputAdornment position="start">
+                <AccountCircle color="primary" />
               </InputAdornment>
             ),
           }}
@@ -122,39 +121,36 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           error={error.email}
           id={error.email ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.email && error.email[0]}
-          label='Email'
-          variant='outlined'
-          margin='normal'
-          name='email'
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          name="email"
           value={email}
+          type="email"
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <Email color='primary' />
+              <InputAdornment position="start">
+                <Email color="primary" />
               </InputAdornment>
             ),
           }}
         />
 
         <TextField
-          error={error.contact_number}
-          id={
-            error.contact_number
-              ? "outlined-error-helper-text"
-              : "outlined-basic"
-          }
-          helperText={error.contact_number && error.contact_number[0]}
-          label='Phone'
-          variant='outlined'
-          margin='normal'
-          name='contact_number'
+          error={error.contact}
+          id={error.contact ? "outlined-error-helper-text" : "outlined-basic"}
+          helperText={error.contact && error.contact[0]}
+          label="Phone"
+          variant="outlined"
+          margin="normal"
+          name="contact_number"
           value={contact_number}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <Phone color='primary' />
+              <InputAdornment position="start">
+                <Phone color="primary" />
               </InputAdornment>
             ),
           }}
@@ -164,44 +160,42 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           error={error.country}
           id={error.country ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.country && error.country[0]}
-          label='Country'
-          variant='outlined'
-          margin='normal'
-          name='country'
+          label="Country"
+          variant="outlined"
+          margin="normal"
+          name="country"
           value={country}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <LocationOn color='primary' />
+              <InputAdornment position="start">
+                <LocationOn color="primary" />
               </InputAdornment>
             ),
           }}
         />
 
         <FormControl
-          variant='outlined'
+          variant="outlined"
           style={{ width: "86%" }}
-          margin='normal'
-          error={error.gender}
-        >
-          <InputLabel id='demo-simple-select-autowidth-label'>
+          margin="normal"
+          error={error.gender}>
+          <InputLabel id="demo-simple-select-autowidth-label">
             Gender
           </InputLabel>
           <Select
-            labelId='demo-simple-select-autowidth-label'
+            labelId="demo-simple-select-autowidth-label"
             id={
               error.gender
                 ? "demo-simple-select-error"
                 : "demo-simple-select-autowidth"
             }
-            label='Gender'
-            name='gender'
+            label="Gender"
+            name="gender"
             value={gender}
-            onChange={(e) => onChange(e)}
-          >
-            <MenuItem value={"Male"}>Male</MenuItem>
-            <MenuItem value={"Female"}>Female</MenuItem>
+            onChange={(e) => onChange(e)}>
+            <MenuItem value={"male"}>Male</MenuItem>
+            <MenuItem value={"female"}>Female</MenuItem>
             <MenuItem value={"Other"}>Other</MenuItem>
           </Select>
           <FormHelperText>{error.gender && error.gender[0]}</FormHelperText>
@@ -211,16 +205,16 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           error={error.password}
           id={error.password ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.password && error.password[0]}
-          label='Password'
-          variant='outlined'
-          margin='normal'
-          name='password'
+          label="Password"
+          variant="outlined"
+          margin="normal"
+          name="password"
           value={password}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <LockRounded color='primary' />
+              <InputAdornment position="start">
+                <LockRounded color="primary" />
               </InputAdornment>
             ),
           }}
@@ -229,28 +223,27 @@ const Register = ({ setRegister, auth: { error }, register }) => {
           error={error.password2}
           id={error.password2 ? "outlined-error-helper-text" : "outlined-basic"}
           helperText={error.password2 && error.password2[0]}
-          label='Confirm Password'
-          variant='outlined'
-          margin='normal'
-          name='password2'
+          label="Confirm Password"
+          variant="outlined"
+          margin="normal"
+          name="password2"
           value={password2}
           onChange={(e) => onChange(e)}
           InputProps={{
             startAdornment: (
-              <InputAdornment position='start'>
-                <LockRounded color='primary' />
+              <InputAdornment position="start">
+                <LockRounded color="primary" />
               </InputAdornment>
             ),
           }}
         />
         <div style={{ height: 20 }}>
           <Button
-            href='/timeline'
-            color='primary'
-            width='100%'
-            variant='contained'
-            onClick={(e) => onSubmit(e)}
-          >
+            href="/timeline"
+            color="primary"
+            width="100%"
+            variant="contained"
+            onClick={(e) => onSubmit(e)}>
             Submit
           </Button>
         </div>
@@ -260,9 +253,9 @@ const Register = ({ setRegister, auth: { error }, register }) => {
         </div>
       </div>
       <div>
-        <Grid container justify='center' spacing={2}>
+        <Grid container justify="center" spacing={2}>
           <Grid item>
-            <Button color='primary'>Go to community page</Button>
+            <Button color="primary">Go to community page</Button>
           </Grid>
         </Grid>
       </div>

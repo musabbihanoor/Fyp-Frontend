@@ -45,15 +45,37 @@ const AddPost = ({ createPost, user, setData, data }) => {
 
     var quranic_ref = [];
     var hadees_ref = [];
+    var hadees_ref2 = [];
 
     QuranReference.map((x) => quranic_ref.push(x.Id));
-    AhadeesReference.map((x) => hadees_ref.push(x.HadithNumber + "a" + x.ID));
+    AhadeesReference.map((x) => hadees_ref.push(x.HadithNumber));
+    AhadeesReference.map((x) => hadees_ref2.push(x.bookid));
+
+    // console.log(
+    //   JSON.stringify(
+    //     "[" +
+    //       JSON.stringify(hadees_ref) +
+    //       "," +
+    //       JSON.stringify(hadees_ref2) +
+    //       "]",
+    //   ),
+    // );
 
     const formData = new FormData();
     formData.append("body", body);
     image_set !== null && formData.append("image_set", image_set);
     quranic_ref.length > 0 && formData.append("quranic_ref", quranic_ref);
-    hadees_ref.length > 0 && formData.append("hadees_ref", hadees_ref);
+    hadees_ref.length > 0 &&
+      formData.append(
+        "hadees_ref",
+        JSON.stringify(
+          "[" +
+            JSON.stringify(hadees_ref) +
+            "," +
+            JSON.stringify(hadees_ref2) +
+            "]",
+        ),
+      );
 
     setLoad(true);
 

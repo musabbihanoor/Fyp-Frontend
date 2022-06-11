@@ -66,17 +66,39 @@ const Post = ({
   const [QuranRef, setQuranRef] = useState([]);
   const [AhadeesRef, setAhadeesRef] = useState([]);
   const [popQuran, setPopQuran] = useState(null);
+  const [popHadees, setPopHadees] = useState(null);
 
-  const fetchRef = async () => {
+  const fetchVerseRef = async () => {
     const dataQuran = [];
-    // const dataAhadees = [];
-    // console.log(JSON.parse("[" + "11110001,21110002" + "]"));
-    JSON.parse("[" + quranic_ref + "]").map((x) => {
-      axios
-        .get(`https://apihadeesquran.herokuapp.com/quran/id/${x}`)
-        .then((res) => dataQuran.push(res.data[0]));
-    });
+
+    quranic_ref &&
+      JSON.parse("[" + quranic_ref + "]").map((x) => {
+        axios
+          .get(`https://apihadeesquran.herokuapp.com/quran/id/${x}`)
+          .then((res) => dataQuran.push(res.data[0]));
+      });
+
     setQuranRef(dataQuran);
+  };
+
+  const fetchHadeesRef = async () => {
+    const dataAhadees = [];
+
+    const tempAhadees = JSON.parse(JSON.parse(hadees_ref));
+
+    tempAhadees &&
+      tempAhadees.length > 0 &&
+      tempAhadees[0].map((x, i) => {
+        axios
+          .get(
+            `https://apihadeesquran.herokuapp.com/hadees/byId/${tempAhadees[1][i]}/${x}`,
+          )
+          .then((res) => {
+            dataAhadees.push(res.data[0]);
+          });
+      });
+    setAhadeesRef(dataAhadees);
+    // console.log(dataAhadees);
   };
 
   const onSubmit = (e) => {
@@ -111,8 +133,9 @@ const Post = ({
     post && getPostReaction(id).then((res) => setLikes(res));
     post && getPostComments(id).then((res) => setComments(res));
 
-    post && quranic_ref && hadees_ref && fetchRef();
-    //  post && hadees_ref && console.log(hadees_ref);
+    post && fetchVerseRef();
+    post && fetchHadeesRef();
+    // post && hadees_ref && console.log(hadees_ref);
     // post &&
     //   hadees_ref &&
     // console.log(JSON.parse("[" + "1@1110001,2@1110002" + "]"));
@@ -234,6 +257,17 @@ const Post = ({
                     </p>
                   ))}
               </div>
+              <div className="references">
+                {AhadeesRef.length > 0 &&
+                  AhadeesRef.map((x, i) => (
+                    <p
+                      key={i}
+                      style={{ cursor: "pointer", fontSize: 12, marginTop: 0 }}
+                      onClick={() => setPopHadees(x)}>
+                      {x.HadithNumber}, {x.BookName}, {x.Sanad}
+                    </p>
+                  ))}
+              </div>
 
               <h6 className="translate">Translate</h6>
             </div>
@@ -279,6 +313,22 @@ const Post = ({
           text={popQuran.Junagarhi}
           subText={popQuran.AyahTextQalam}
           subSubText={popQuran.AyahNumber + ", " + popQuran.SurahName}
+        />
+      )}
+
+      {popHadees && (
+        <Popup
+          func={() => setPopHadees(null)}
+          heading={popHadees.Arabic}
+          text={popHadees.English}
+          subText={popHadees.Urdu}
+          subSubText={
+            popHadees.HadithNumber +
+            ", " +
+            popHadees.BookName +
+            ", " +
+            popHadees.Sanad
+          }
         />
       )}
     </Fragment>

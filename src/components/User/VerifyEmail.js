@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ChangeEmail from "./ChangeEmail";
 import { updateProfile } from "../../actions/profile";
-import { verifyEmail } from "../../actions/auth";
+import { verifyEmail, confirmEmail } from "../../actions/auth";
 import "./User.css";
 import { Button } from "@material-ui/core";
-import ReactInputVerificationCode from "react-input-verification-code";
+// import ReactInputVerificationCode from "react-input-verification-code";
 
 const VerifyEmail = ({
   auth: { isAuthenticated, loading, verified, user },
@@ -15,10 +15,11 @@ const VerifyEmail = ({
   updateProfile,
   profile: { error },
   verifyEmail,
+  confirmEmail,
 }) => {
   const [change, setChange] = useState(false);
   const [newEmail, setNewEmail] = useState("");
-  const [value, setValue] = useState(null);
+  const [code, setCode] = useState(null);
   const [sent, setSent] = useState(false);
   const [updatedEmail, setUpdatedEmail] = useState("");
 
@@ -30,6 +31,11 @@ const VerifyEmail = ({
       history.push("/timeline");
     }
   }, [isAuthenticated, loading, verified]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    confirmEmail({ code: code }).then((res) => console.log(res));
+  };
 
   return (
     <Fragment>
@@ -43,14 +49,15 @@ const VerifyEmail = ({
               <h4 style={{ textAlign: "center" }}>
                 Enter the code we have sent on your email
               </h4>
-              <ReactInputVerificationCode
+              {/* <ReactInputVerificationCode
                 value={value}
                 placeholder={null}
                 length={6}
                 onChange={(newValue) => {
                   setValue(newValue);
                 }}
-              />
+              /> */}
+              <input value={code} onChange={(e) => setCode(e.target.value)} />
             </div>
           )}
           <div>
@@ -69,6 +76,15 @@ const VerifyEmail = ({
                 variant="outlined"
                 onClick={() => setChange(true)}>
                 Change email
+              </Button>
+            )}
+
+            {sent && (
+              <Button
+                color="primary"
+                variant="outlined"
+                onClick={(e) => onSubmit(e)}>
+                Upload
               </Button>
             )}
           </div>
@@ -94,6 +110,7 @@ VerifyEmail.propTypes = {
   updateProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   verifyEmail: PropTypes.func.isRequired,
+  confirmEmail: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -101,6 +118,8 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { updateProfile, verifyEmail })(
-  withRouter(VerifyEmail),
-);
+export default connect(mapStateToProps, {
+  updateProfile,
+  verifyEmail,
+  confirmEmail,
+})(withRouter(VerifyEmail));

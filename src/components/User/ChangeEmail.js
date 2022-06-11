@@ -32,7 +32,7 @@ const ChangeEmail = ({
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
             error={error.email}
-            helperText={error.email && error.email[0]}
+            helperText={error.email && error.email}
             placeholder="New email"
           />
           <Button

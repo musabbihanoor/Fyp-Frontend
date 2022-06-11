@@ -11,6 +11,7 @@ import {
   getProfile,
   getEducations,
   getExperience,
+  updateProfile,
 } from "../../actions/profile";
 
 import ProfilePosts from "./ProfilePosts";
@@ -26,6 +27,7 @@ const Profile = ({
   getProfile,
   getEducations,
   getExperience,
+  updateProfile,
   profile: { profile, educations, experiences },
 }) => {
   const location = useLocation();
@@ -34,6 +36,21 @@ const Profile = ({
   const [nav, setNav] = useState(1);
   const [showVerse, setShowVerse] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showCover, setShowCover] = useState(null);
+
+  const onCoverChange = (e) => {
+    e.preventDefault();
+    var binaryData = [];
+    binaryData.push(e.target.files[0]);
+    setShowCover(
+      window.URL.createObjectURL(
+        new Blob(binaryData, { type: "application/zip" }),
+      ),
+    );
+    var formData = new FormData();
+    formData.append("cover_picture", e.target.files[0]);
+    updateProfile(formData, user.id).then((res) => console.log(res));
+  };
 
   useEffect(() => {
     // Redirect if logged out
@@ -63,19 +80,32 @@ const Profile = ({
             src={
               profile.cover
                 ? profile.cover
+                : showCover
+                ? showCover
                 : "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png"
             }
           />
-          <Button
-            variant="contained"
-            style={{
-              position: "absolute",
-              top: 450,
-              right: 50,
-              // zIndex: "10000",
-            }}>
-            Upload
-          </Button>
+          {profile.id === auth.user.id && (
+            <Button
+              variant="contained"
+              style={{
+                position: "absolute",
+                top: 450,
+                right: 50,
+              }}>
+              <label
+                style={{
+                  cursor: "pointer",
+                }}>
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={(e) => onCoverChange(e)}
+                />
+                Upload
+              </label>
+            </Button>
+          )}
           <Grid container justifyContent="center" className="profile-head">
             <Grid item>
               <img
@@ -214,6 +244,7 @@ Profile.propTypes = {
   getProfile: PropTypes.func.isRequired,
   getEducations: PropTypes.func.isRequired,
   getExperience: PropTypes.func.isRequired,
+  updateProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -225,4 +256,5 @@ export default connect(mapStateToProps, {
   getProfile,
   getEducations,
   getExperience,
+  updateProfile,
 })(withRouter(Profile));

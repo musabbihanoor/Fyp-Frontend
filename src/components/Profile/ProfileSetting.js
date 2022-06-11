@@ -372,7 +372,6 @@ const ProfileSetting = ({
                     type="file"
                     style={{ display: "none" }}
                     onChange={(e) => {
-                      console.log("here");
                       setChangeImage(true);
                       setImage(e.target.files[0]);
                       var binaryData = [];
