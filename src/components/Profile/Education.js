@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Grid,
   TextField,
-  InputAdornment,
   FormControl,
   InputLabel,
   Select,
@@ -75,6 +73,8 @@ const Education = ({
         visibility: update.visibility,
         study_here: update.study_here,
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
   return (

@@ -70,6 +70,8 @@ const Verses = ({ setShowOption, reference, setRef }) => {
 
     selectedSurah !== "" && fetchVerses(selectedSurah, "bySurah");
     selectedParah !== "" && fetchVerses(selectedParah, "byParah");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedParah, selectedSurah]);
 
   return (
@@ -252,6 +254,8 @@ const Item = ({ x, reference, searchEng, referencing }) => {
 
   useEffect(() => {
     reference.find((i) => i.Id === x.Id) && setAdded(true);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

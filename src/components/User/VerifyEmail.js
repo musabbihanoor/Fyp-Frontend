@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ChangeEmail from "./ChangeEmail";
@@ -30,6 +30,8 @@ const VerifyEmail = ({
     if (isAuthenticated && !loading && verified) {
       history.push("/timeline");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, loading, verified]);
 
   const onSubmit = (e) => {

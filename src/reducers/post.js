@@ -13,7 +13,7 @@ const initialState = {
   error: {},
 };
 
-export default function (state = initialState, action) {
+export default function post(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -41,7 +41,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: state.posts.map((post) =>
-          post.id === payload.id ? payload : post
+          post.id === payload.id ? payload : post,
         ),
         loading: false,
       };

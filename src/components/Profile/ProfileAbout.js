@@ -149,27 +149,39 @@ const ProfileAbout = ({
         <h3>Groups</h3>
         <Grid container>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Group Name</p>
           </Grid>
         </Grid>
@@ -179,27 +191,39 @@ const ProfileAbout = ({
         <h3>Liked</h3>
         <Grid container>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
           <Grid item xs={2} className="item">
-            <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+            <img
+              alt="display"
+              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             <p>Page Name</p>
           </Grid>
         </Grid>

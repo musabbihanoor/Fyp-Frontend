@@ -72,6 +72,8 @@ const Ahadees = ({ reference, setRef, setShowOption }) => {
     fetchBooks();
     selectedBook !== "" && fetchChapters();
     selectedBook !== "" && selectedChapter !== "" && fetchVerses();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBook, selectedChapter]);
 
   return (
@@ -210,6 +212,8 @@ const Hadees = ({ x, reference, setRef, searchText2 }) => {
 
   useEffect(() => {
     reference.find((i) => i.ID === x.ID) && setAdded(true);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

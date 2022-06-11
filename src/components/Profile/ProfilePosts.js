@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Posts from "../Timeline/Post/Posts";
-import { Grid, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Edit, MoreHoriz } from "@material-ui/icons";
 
 const ProfilePosts = ({ profile, getProfile, setShowVerse, setLoading }) => {
@@ -42,6 +42,7 @@ const ProfilePosts = ({ profile, getProfile, setShowVerse, setLoading }) => {
                     getProfile(x.id).then((res) => setLoading(false));
                   }}>
                   <img
+                    alt="profile"
                     src={
                       x.profile_picture
                         ? x.profile_picture
@@ -59,19 +60,29 @@ const ProfilePosts = ({ profile, getProfile, setShowVerse, setLoading }) => {
           </button>
           <Grid container>
             <Grid item xs={4} className="item">
-              <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+              <img
+                alt="profile"
+                src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             </Grid>
             <Grid item xs={4} className="item">
-              <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+              <img
+                alt="profile"
+                src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             </Grid>
             <Grid item xs={4} className="item">
-              <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+              <img
+                alt="profile"
+                src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             </Grid>
             <Grid item xs={4} className="item">
-              <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+              <img
+                alt="profile"
+                src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             </Grid>
             <Grid item xs={4} className="item">
-              <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+              <img
+                alt="profile"
+                src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
             </Grid>
           </Grid>
         </div>

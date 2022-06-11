@@ -10,8 +10,6 @@ import ProfileSetting from "./components/Profile/ProfileSetting";
 import VerifyEmail from "./components/User/VerifyEmail";
 import Group from "./components/Groups/Group";
 import Page from "./components/Page/Page";
-import Confirm from "./components/Popup/Confirm";
-import Popup from "./components/Popup/Popup";
 
 import { Provider } from "react-redux";
 import store from "./store";

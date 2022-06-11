@@ -122,7 +122,9 @@ const Page = () => {
               <h3>Followers</h3>
               <Grid container>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                   <p>User name</p>
                 </Grid>
               </Grid>
@@ -131,19 +133,29 @@ const Page = () => {
               <h3>Photos</h3>
               <Grid container>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                 </Grid>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                 </Grid>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                 </Grid>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                 </Grid>
                 <Grid item xs={4} className="item">
-                  <img src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
+                  <img
+                    alt="cover"
+                    src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
                 </Grid>
               </Grid>
             </div>

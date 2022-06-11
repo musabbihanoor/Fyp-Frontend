@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { Redirect, withRouter, useLocation, Link } from "react-router-dom";
+import { Redirect, withRouter, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -63,7 +63,7 @@ const Profile = ({
       getExperience();
     }
 
-    // console.log(loading);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, auth.loading]);
 
   return (

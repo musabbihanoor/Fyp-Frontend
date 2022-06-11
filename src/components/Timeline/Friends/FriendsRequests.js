@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -19,8 +19,8 @@ const FriendsRequest = ({
   profile: { loading, profiles },
   auth: { user },
 }) => {
-  const [suggest, setSuggest] = useState(null);
-  const [request, setRequest] = useState(null);
+  // const [suggest, setSuggest] = useState(null);
+  // const [request, setRequest] = useState(null);
 
   useEffect(() => {
     getProfiles();
@@ -35,6 +35,8 @@ const FriendsRequest = ({
     //   const data2 = res.filter((x) => x.id !== request_list.id);
     //   console.log(data2);
     // }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

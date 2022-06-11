@@ -6,8 +6,6 @@ import { getPosts } from "../../../actions/post";
 import "../Timeline.css";
 import Loading from "../../Layout/Loading";
 
-import axios from "axios";
-
 const Posts = ({
   getPosts,
   post: { posts, loading },
@@ -25,6 +23,8 @@ const Posts = ({
         : setData(res);
       setLoading(false);
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userid]);
 
   return (

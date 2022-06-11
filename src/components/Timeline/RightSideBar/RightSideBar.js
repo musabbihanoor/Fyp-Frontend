@@ -1,5 +1,5 @@
 import React from "react";
-import FriendRequest from "./FriendRequest";
+// import FriendRequest from "./FriendRequest";
 import GroupAd from "./GroupAd";
 import Friends from "./Friends";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Education from "./Education";
@@ -124,6 +124,8 @@ const ProfileSetting = ({
 
     getEducations();
     getExperience();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, loading, user]);
 
   return (
@@ -352,7 +354,7 @@ const ProfileSetting = ({
                     ? user.profile_picture
                     : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
                 }
-                alt="profile picture"
+                alt="profile"
                 style={{
                   width: 200,
                   height: 200,

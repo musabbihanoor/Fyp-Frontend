@@ -10,6 +10,7 @@ const Friends = ({ user }) => {
           <Link to={{ pathname: "/profile", state: { user: x } }} key={i}>
             <div className="user-info">
               <img
+                alt="profile"
                 src={
                   x.profile_picture
                     ? x.profile_picture

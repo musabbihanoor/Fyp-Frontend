@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -9,8 +9,6 @@ import Menu from "./Menu";
 import FriendRequest from "./Friends/FriendsRequests";
 import RightSideBar from "./RightSideBar/RightSideBar";
 import { Grid } from "@material-ui/core";
-import axios from "axios";
-// import { getVerses } from "../../actions/refrences";
 
 import "./Timeline.css";
 
@@ -33,6 +31,8 @@ const Timeline = ({
     if (isAuthenticated && !loading && !verified) {
       history.push("/verify");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, loading]);
 
   return (

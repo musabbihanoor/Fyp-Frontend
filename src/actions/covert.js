@@ -32,8 +32,8 @@ export const covertToArabic = (yas) => {
   yas = yas.replace(/j/g, "ت");
   yas = yas.replace(/k/g, "ن");
   yas = yas.replace(/l/g, "م");
-  yas = yas.replace(/\;/g, "ك");
-  yas = yas.replace(/\'/g, "ط");
+  yas = yas.replace(/;/g, "ك");
+  yas = yas.replace(/'/g, "ط");
   yas = yas.replace(/z/g, "ئ");
   yas = yas.replace(/x/g, "ء");
   yas = yas.replace(/c/g, "ؤ");
@@ -41,7 +41,7 @@ export const covertToArabic = (yas) => {
   yas = yas.replace(/b/g, "لا");
   yas = yas.replace(/n/g, "ى");
   yas = yas.replace(/m/g, "ة");
-  yas = yas.replace(/\,/g, "و");
+  yas = yas.replace(/,/g, "و");
   yas = yas.replace(/\./g, "ز");
   yas = yas.replace(/\//g, "ظ");
   yas = yas.replace(/~/g, " ّ");

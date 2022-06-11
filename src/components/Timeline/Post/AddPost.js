@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -95,6 +95,7 @@ const AddPost = ({ createPost, user, setData, data }) => {
         <Link to={{ pathname: "/profile", state: { user: user } }}>
           <div className="user-info">
             <img
+              alt="profile"
               src={
                 user && user.profile_picture
                   ? user.profile_picture
@@ -184,7 +185,7 @@ const AddPost = ({ createPost, user, setData, data }) => {
         </form>{" "}
         {showImage && (
           <div className="show-image">
-            <img src={showImage}></img>
+            <img alt="profile" src={showImage}></img>
             <button
               onClick={() => {
                 setShowImage("");

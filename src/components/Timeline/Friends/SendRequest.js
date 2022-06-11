@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Grid, Button, Avatar } from "@material-ui/core";
-import { Check, CancelOutlined } from "@material-ui/icons";
 import Popup from "../../Popup/Popup";
 
 const SendRequest = ({
@@ -22,6 +21,8 @@ const SendRequest = ({
     ) {
       setShow(false);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.friend_list]);
   return (
     <Fragment>

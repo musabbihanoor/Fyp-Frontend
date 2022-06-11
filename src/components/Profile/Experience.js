@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 
 import {
-  Grid,
   TextField,
-  InputAdornment,
   FormControl,
   InputLabel,
   Select,
@@ -84,6 +82,7 @@ const Experience = ({
         start: update.start,
         end: update.end,
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
   return (

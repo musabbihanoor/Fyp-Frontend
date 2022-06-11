@@ -9,10 +9,10 @@ const ProfileFriends = ({
   return (
     <div className="about-friends">
       <h3>Friends</h3>
-      <span>
+      {/* <span>
         <a>Friend Requests</a>
         <a>Suggestions</a>
-      </span>
+      </span> */}
       <div className="list">
         {friend_list.map((x, i) => (
           <div
@@ -23,6 +23,7 @@ const ProfileFriends = ({
               getProfile(x.id).then((res) => setLoading(false));
             }}>
             <img
+              alt="profile"
               src={
                 x.profile_picture
                   ? x.profile_picture
