@@ -109,7 +109,27 @@ export const createFriendRequest = (id) => async (dispatch) => {
   }
 };
 
-// Create friend request
+// Cancel friend request
+export const cancelFriendRequest = (id) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  } else {
+    return;
+  }
+
+  try {
+    const res = await axios.get(`${BASE_URL}/account/cancel_request/${id}/`);
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.data, status: err.response.status },
+    });
+  }
+};
+
+// Accept friend request
 export const acceptFriendRequest = (id, action) => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -208,7 +228,7 @@ export const updateEducation = (id, data) => async (dispatch) => {
     };
 
     const res = await axios.patch(
-      `${BASE_URL}/account/EducationGetUpdateDelete/${id}`,
+      `${BASE_URL}/account/EducationGetUpdateDelete/${id}/`,
       data,
       config,
     );
@@ -333,7 +353,7 @@ export const updateExperience = (id, data) => async (dispatch) => {
     };
 
     const res = await axios.patch(
-      `${BASE_URL}/account/WorkGetUpdateDelete/${id}`,
+      `${BASE_URL}/account/WorkGetUpdateDelete/${id}/`,
       data,
       config,
     );

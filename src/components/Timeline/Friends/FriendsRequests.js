@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import Loading from "../../Layout/Loading";
 
 import {
   getProfiles,
@@ -19,40 +20,30 @@ const FriendsRequest = ({
   profile: { loading, profiles },
   auth: { user },
 }) => {
-  // const [suggest, setSuggest] = useState(null);
-  // const [request, setRequest] = useState(null);
+  const [load, setLoad] = useState(true);
 
   useEffect(() => {
-    getProfiles();
-    // // res.map(x => {
-    // //   console.log()
-    // // })
-    // if (friend_list.length > 0) {
-    //   const data1 = res.filter((x) => friend_list.map(y => ));
-    //   console.log(data1);
-    // }
-    // if (request_list.length > 0) {
-    //   const data2 = res.filter((x) => x.id !== request_list.id);
-    //   console.log(data2);
-    // }
+    getProfiles().then((res) => setLoad(false));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
       <h3>Friend Request</h3>
-      {user &&
+      {user && user.request_list.length > 0 ? (
         user.request_list.map((x, i) => (
           <AcceptRequest
             key={i}
             profile={x}
             acceptFriendRequest={acceptFriendRequest}
           />
-        ))}
+        ))
+      ) : (
+        <p style={{ color: "#F50057" }}>No Request</p>
+      )}
 
       <h3>Suggested for you</h3>
-      {!loading &&
-        profiles.length > 0 &&
+      {!loading && profiles.length > 0 ? (
         profiles.map((x, i) => (
           <SendRequest
             key={i}
@@ -60,7 +51,11 @@ const FriendsRequest = ({
             user={user}
             createFriendRequest={createFriendRequest}
           />
-        ))}
+        ))
+      ) : (
+        <p style={{ color: "#F50057" }}>No suggested user</p>
+      )}
+      {load && <Loading />}
     </>
   );
 };

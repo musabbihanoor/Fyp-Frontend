@@ -32,8 +32,15 @@ const Experience = ({
     end: null,
   });
 
-  const { organization, job_title, location, visibility, start, end } =
-    formData;
+  const {
+    organization,
+    job_title,
+    location,
+    visibility,
+    start,
+    end,
+    work_here,
+  } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,7 +49,7 @@ const Experience = ({
     e.preventDefault();
     if (update === null) {
       createExperience(formData).then((res) => {
-        res.status === 201 &&
+        (res.status === 201 || res.status === 200) &&
           setFormData({
             organization: "",
             job_title: "",
@@ -55,7 +62,7 @@ const Experience = ({
       });
     } else {
       updateExperience(update.id, formData).then((res) => {
-        res.status === 201 &&
+        (res.status === 201 || res.status === 200) &&
           setFormData({
             organization: "",
             job_title: "",
@@ -218,7 +225,7 @@ const Experience = ({
               <label>Ending Date</label>
               <input
                 name="end"
-                value={end}
+                value={work_here ? null : end}
                 type="date"
                 onChange={(e) => onChange(e)}
               />
@@ -226,6 +233,7 @@ const Experience = ({
                 <input
                   type="checkbox"
                   id="work"
+                  checked={work_here}
                   onChange={(e) =>
                     setFormData({ ...formData, work_here: e.target.checked })
                   }

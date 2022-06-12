@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
+import { Send } from "@material-ui/icons";
 import Comment from "./Comment";
 import DisplayLikes from "./DisplayLikes";
 
@@ -95,14 +96,17 @@ const PostDisplay = ({
           <i className="fas fa-times"></i>
         </button>
         <Grid container>
-          {image_set && (
-            <Grid item xs={12} sm={6}>
-              <img
-                src={image_set}
-                style={{ width: "100%", height: "600px", objectFit: "cover" }}
-                alt="brand"></img>
-            </Grid>
-          )}
+          <Grid item xs={12} sm={6}>
+            <img
+              src={
+                image_set
+                  ? image_set
+                  : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
+              }
+              style={{ width: "100%", height: "600px", objectFit: "cover" }}
+              alt="brand"></img>
+          </Grid>
+
           <Grid
             container
             item
@@ -157,24 +161,27 @@ const PostDisplay = ({
             <div className="comments">
               <h3 style={{ margin: 0 }}>Comments</h3>
               <form
-                style={{ display: "flex", alignItems: "center", width: "95%" }}>
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  width: "95%",
+                }}>
                 <TextField
                   error={commentError}
                   id={commentError ? "error-helper-text" : "basic"}
                   helperText={commentError && "Add a comment"}
-                  label="Comment"
                   variant="standard"
                   margin="normal"
                   fullWidth
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Enter a comment"
                 />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={(e) => submitComment(e)}>
-                  Add
-                </Button>
+                <button
+                  onClick={(e) => submitComment(e)}
+                  style={{ color: "#3F51B5" }}>
+                  <Send />
+                </button>
               </form>
               {comments &&
                 comments.length > 0 &&

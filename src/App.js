@@ -10,6 +10,7 @@ import ProfileSetting from "./components/Profile/ProfileSetting";
 import VerifyEmail from "./components/User/VerifyEmail";
 import Group from "./components/Groups/Group";
 import Page from "./components/Page/Page";
+import VerifyCNIC from "./components/User/VerifyCNIC";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -50,6 +51,7 @@ const App = () => {
             />
             <Route exact path="/profile/setting" component={ProfileSetting} />
             <Route exact path="/verify" component={VerifyEmail} />
+            <Route exact path="/verifycnic" component={VerifyCNIC} />
             <Route exact path="/group" component={Group} />
             <Route exact path="/page" component={Page} />
           </Switch>

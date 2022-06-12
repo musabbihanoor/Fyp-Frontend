@@ -142,3 +142,42 @@ export const confirmEmail = (data, history) => async (dispatch) => {
     return err;
   }
 };
+
+// verify id
+export const verifyId = (data) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  } else {
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const res = await axios.post(
+      `${BASE_URL}/account/id_verify/`,
+      data,
+      config,
+    );
+
+    dispatch(loadUser());
+
+    // dispatch({
+    //   type: UPDATE_PROFILE,
+    //   payload: res.data,
+    // });
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response.data,
+    });
+    console.log(err);
+    return err.response;
+  }
+};

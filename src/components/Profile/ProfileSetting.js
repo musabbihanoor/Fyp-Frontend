@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Education from "./Education";
 import Experience from "./Experience";
+import Loading from "../Layout/Loading";
 
 import {
   Grid,
@@ -58,6 +59,7 @@ const ProfileSetting = ({
   const [changeImage, setChangeImage] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
   const [showExperience, setShowExperience] = useState(false);
+  const [load, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -87,10 +89,13 @@ const ProfileSetting = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    updateProfile(formData, user.id).then(
-      (res) => res.status === 200 && history.push("/timeline"),
-    );
+    setLoading(true);
+    updateProfile(formData, user.id).then((res) => {
+      if (res.status === 200) {
+        history.push({ pathname: "/profile", state: { user: user } });
+        setLoading(false);
+      }
+    });
   };
 
   const onImageSubmit = (e) => {
@@ -112,7 +117,7 @@ const ProfileSetting = ({
       setFormData({
         ...formData,
         name: user.name ? user.name : "",
-        username: user.username ? user.username : "",
+        // email: user.email ? user.email : "",
         contact_number: user.contact_number ? user.contact_number : "",
         gender: user.gender ? user.gender : "",
         country: user.country ? user.country : "",
@@ -120,6 +125,9 @@ const ProfileSetting = ({
         description: user.description ? user.description : "",
         home_town: user.home_town ? user.home_town : "",
         city: user.city ? user.city : "",
+        username: user.username ? user.username : "",
+        password: user.password ? user.password : "",
+        password2: user.password2 ? user.password2 : "",
       });
 
     getEducations();
@@ -150,7 +158,7 @@ const ProfileSetting = ({
                 variant="outlined"
                 margin="normal"
                 name="name"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 value={name}
                 onChange={(e) => onChange(e)}
                 InputProps={{
@@ -164,7 +172,7 @@ const ProfileSetting = ({
               <FormControl
                 variant="outlined"
                 margin="normal"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 error={error.gender}>
                 <InputLabel id="demo-simple-select-autowidth-label">
                   Gender
@@ -211,7 +219,7 @@ const ProfileSetting = ({
               variant="outlined"
               margin="normal"
               name="description"
-              style={{ width: 950, marginRight: 10 }}
+              style={{ width: "100%", marginRight: 10 }}
               value={description}
               onChange={(e) => onChange(e)}
               InputProps={{
@@ -236,7 +244,7 @@ const ProfileSetting = ({
                 variant="outlined"
                 margin="normal"
                 name="country"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 value={country}
                 onChange={(e) => onChange(e)}
                 InputProps={{
@@ -257,7 +265,7 @@ const ProfileSetting = ({
                 variant="outlined"
                 margin="normal"
                 name="city"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 value={city}
                 onChange={(e) => onChange(e)}
                 InputProps={{
@@ -280,7 +288,7 @@ const ProfileSetting = ({
                 variant="outlined"
                 margin="normal"
                 name="home_town"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 value={home_town}
                 onChange={(e) => onChange(e)}
                 InputProps={{
@@ -310,7 +318,7 @@ const ProfileSetting = ({
                 variant="outlined"
                 margin="normal"
                 name="contact_number"
-                style={{ width: 300, marginRight: 10 }}
+                style={{ width: "30%", marginRight: 10 }}
                 value={contact_number}
                 onChange={(e) => onChange(e)}
                 InputProps={{
@@ -336,6 +344,15 @@ const ProfileSetting = ({
               style={{ marginBottom: 10 }}>
               Experience
             </Button>
+            {user && !user.id_verified && (
+              <Button
+                href="/verifycnic"
+                color="secondary"
+                variant="contained"
+                style={{ marginBottom: 10 }}>
+                Verify Profile
+              </Button>
+            )}
           </Grid>
 
           <Grid
@@ -446,6 +463,8 @@ const ProfileSetting = ({
           error={error}
         />
       )}
+
+      {load && <Loading />}
     </div>
   );
 };

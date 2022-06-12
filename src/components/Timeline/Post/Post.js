@@ -59,8 +59,8 @@ const Post = ({
 
   const [updateText, setUpdateText] = useState("");
   const [displayPost, setDisplayPost] = useState(false);
-  const [likes, setLikes] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   // const [translate, setTranslate] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [QuranRef, setQuranRef] = useState([]);

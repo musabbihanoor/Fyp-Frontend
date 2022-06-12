@@ -1,10 +1,22 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { Redirect, withRouter, useLocation } from "react-router-dom";
+import {
+  Redirect,
+  withRouter,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Grid, Button } from "@material-ui/core";
-import { LocationOn, Email, Phone, Settings } from "@material-ui/icons";
+import {
+  LocationOn,
+  Email,
+  Phone,
+  Settings,
+  Cancel,
+  FiberManualRecord,
+} from "@material-ui/icons";
 import Loading from "../Layout/Loading";
 
 import {
@@ -12,14 +24,17 @@ import {
   getEducations,
   getExperience,
   updateProfile,
+  acceptFriendRequest,
+  createFriendRequest,
 } from "../../actions/profile";
 
 import ProfilePosts from "./ProfilePosts";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFriends from "./ProfileFriends";
 import Image from "../Layout/Image";
-import "./Profile.css";
 import VerseList from "./VerseList";
+import Popup from "../Popup/Popup";
+import "./Profile.css";
 
 const Profile = ({
   auth: { isAuthenticated },
@@ -29,14 +44,18 @@ const Profile = ({
   getExperience,
   updateProfile,
   profile: { profile, educations, experiences },
+  createFriendRequest,
+  acceptFriendRequest,
 }) => {
   const location = useLocation();
+  const history = useHistory();
   const { user } = location.state;
   const [showProfilePic, setShowProfilePic] = useState(false);
   const [nav, setNav] = useState(1);
   const [showVerse, setShowVerse] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showCover, setShowCover] = useState(null);
+  const [pop, setPop] = useState("");
 
   const onCoverChange = (e) => {
     e.preventDefault();
@@ -50,6 +69,28 @@ const Profile = ({
     var formData = new FormData();
     formData.append("cover_picture", e.target.files[0]);
     updateProfile(formData, user.id).then((res) => console.log(res));
+  };
+
+  const unfriend = () => {};
+
+  const acceptRequest = () => {
+    acceptFriendRequest(profile.id, "accept").then((res) =>
+      setPop("Friend Request Accepted"),
+    );
+  };
+
+  // const rejectRequest = () => {
+  //   acceptFriendRequest(profile.id, "reject").then((res) =>
+  //     setPop("Friend Request Rejected"),
+  //   );
+  // };
+
+  const cancelRequest = () => {};
+
+  const addFriend = async () => {
+    createFriendRequest(profile.id).then((res) =>
+      setPop("Friend Request Sent"),
+    );
   };
 
   useEffect(() => {
@@ -78,8 +119,8 @@ const Profile = ({
             }}
             alt="cover"
             src={
-              profile.cover
-                ? profile.cover
+              profile.cover_picture
+                ? profile.cover_picture
                 : showCover
                 ? showCover
                 : "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png"
@@ -131,7 +172,27 @@ const Profile = ({
             </Grid>
             <Grid item>
               <div>
-                <h2 className="name">{profile.name}</h2>
+                <h2 className="name">
+                  {profile.name}
+                  {auth.user.friend_list.find((x) => x.id === profile.id) && (
+                    <>
+                      <span
+                        style={{
+                          color: "#F50057",
+                          fontSize: 12,
+                          fontWeight: "300",
+                          marginLeft: 10,
+                        }}>
+                        <FiberManualRecord
+                          style={{
+                            fontSize: 12,
+                          }}
+                        />
+                        Friends
+                      </span>
+                    </>
+                  )}
+                </h2>
                 <Grid container>
                   <Grid item>
                     <Button
@@ -172,9 +233,34 @@ const Profile = ({
             <Grid
               item
               style={{ alignSelf: "flex-end", margin: "0 0 10px 200px" }}>
-              {profile.id === auth.user.id && (
+              {profile.id === auth.user.id ? (
                 <Button href="/profile/setting" variant="contained">
                   <Settings /> Edit
+                </Button>
+              ) : auth.user.friend_list.find((x) => x.id === profile.id) ? (
+                <Button variant="contained" onClick={() => unfriend()}>
+                  <Cancel /> Unfriend
+                </Button>
+              ) : auth.user.request_list.find((x) => x.id === profile.id) ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => acceptRequest()}>
+                  Accept Request
+                </Button>
+              ) : profile.request_list.find((x) => x.id === auth.user.id) ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => cancelRequest()}>
+                  Cancel Request
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => addFriend()}>
+                  Add Friend
                 </Button>
               )}
             </Grid>
@@ -202,8 +288,10 @@ const Profile = ({
             <ProfilePosts
               profile={profile}
               getProfile={getProfile}
-              setShowVerse={setShowVerse}
+              // setShowVerse={setShowVerse}
               setLoading={setLoading}
+              educations={educations}
+              experiences={experiences}
             />
           )}
           {nav === 2 && (
@@ -234,6 +322,16 @@ const Profile = ({
       {showVerse && <VerseList setShowVerse={setShowVerse} />}
 
       {loading && <Loading />}
+
+      {pop !== "" && (
+        <Popup
+          func={() => {
+            setPop("");
+            history.go();
+          }}
+          heading={pop}
+        />
+      )}
     </Fragment>
   );
 };
@@ -245,6 +343,8 @@ Profile.propTypes = {
   getEducations: PropTypes.func.isRequired,
   getExperience: PropTypes.func.isRequired,
   updateProfile: PropTypes.func.isRequired,
+  createFriendRequest: PropTypes.func.isRequired,
+  acceptFriendRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -257,4 +357,6 @@ export default connect(mapStateToProps, {
   getEducations,
   getExperience,
   updateProfile,
+  createFriendRequest,
+  acceptFriendRequest,
 })(withRouter(Profile));

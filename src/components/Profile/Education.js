@@ -29,8 +29,13 @@ const Education = ({
 
   const [update, setUpdate] = useState(null);
 
-  const { education_type, education_level, organization, visibility } =
-    formData;
+  const {
+    education_type,
+    education_level,
+    organization,
+    visibility,
+    study_here,
+  } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,7 +44,7 @@ const Education = ({
     e.preventDefault();
     if (update === null) {
       createEducation(formData).then((res) => {
-        res.status === 201 &&
+        (res.status === 201 || res.status === 200) &&
           setFormData({
             education_type: "",
             education_level: "",
@@ -50,7 +55,7 @@ const Education = ({
       });
     } else {
       updateEducation(update.id, formData).then((res) => {
-        res.status === 201 &&
+        (res.status === 201 || res.status === 200) &&
           setFormData({
             education_type: "",
             education_level: "",
@@ -127,7 +132,7 @@ const Education = ({
                 : "outlined-basic"
             }
             helperText={error.education_type && error.education_type[0]}
-            label="Type"
+            label="Degree Name"
             variant="outlined"
             margin="normal"
             name="education_type"
@@ -154,9 +159,11 @@ const Education = ({
               name="education_level"
               value={education_level}
               onChange={(e) => onChange(e)}>
-              <MenuItem value={"Level 1"}>Level1</MenuItem>
-              <MenuItem value={"Level 2"}>Level2</MenuItem>
-              <MenuItem value={"Other"}>Other</MenuItem>
+              <MenuItem value={"School"}>School</MenuItem>
+              <MenuItem value={"College"}>College </MenuItem>
+              <MenuItem value={"Undergraduate"}>Undergraduate</MenuItem>
+              <MenuItem value={"Graduated"}>Graduated</MenuItem>
+              <MenuItem value={"PhD"}>PhD</MenuItem>
             </Select>
             <FormHelperText>
               {error.education_level && error.education_level[0]}
@@ -207,6 +214,7 @@ const Education = ({
           <div style={{ marginBottom: 10 }}>
             <input
               type="checkbox"
+              checked={study_here}
               onChange={(e) =>
                 setFormData({ ...formData, study_here: e.target.checked })
               }
