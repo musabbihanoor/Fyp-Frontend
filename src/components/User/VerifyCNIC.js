@@ -37,7 +37,7 @@ const VerifyCNIC = ({
     var formData = new FormData();
     formData.append("name", name);
     formData.append("cnic", id);
-    formData.append("front", back);
+    formData.append("front", front);
     formData.append("back", back);
     verifyId(formData).then((res) => console.log(res));
   };

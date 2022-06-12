@@ -97,14 +97,12 @@ const PostDisplay = ({
         </button>
         <Grid container>
           <Grid item xs={12} sm={6}>
-            <img
-              src={
-                image_set
-                  ? image_set
-                  : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
-              }
-              style={{ width: "100%", height: "600px", objectFit: "cover" }}
-              alt="brand"></img>
+            {image_set && (
+              <img
+                src={image_set}
+                style={{ width: "100%", height: "600px", objectFit: "cover" }}
+                alt="brand"></img>
+            )}
           </Grid>
 
           <Grid

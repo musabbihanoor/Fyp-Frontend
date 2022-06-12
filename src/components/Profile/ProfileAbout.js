@@ -115,12 +115,13 @@ const ProfileAbout = ({
                         </div>
                       ),
                   )}
+                {experiences.length === 0 && <p>No experience to show.</p>}
               </div>
             )}
 
             {menu === 3 && (
               <div className="work">
-                {educations.length > 0 ? (
+                {educations.length > 0 &&
                   educations.map(
                     (x, i) =>
                       x.visibility === "Visible" && (
@@ -135,10 +136,8 @@ const ProfileAbout = ({
                           <h6>{x.education_level}</h6>
                         </div>
                       ),
-                  )
-                ) : (
-                  <p>No education to show!</p>
-                )}
+                  )}
+                {educations.length === 0 && <p>No education to show.</p>}
               </div>
             )}
           </div>

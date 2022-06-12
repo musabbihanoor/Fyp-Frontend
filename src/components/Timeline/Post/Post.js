@@ -21,13 +21,13 @@ import { Button, Menu, MenuItem } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
 import axios from "axios";
 import Popup from "../../Popup/Popup";
+// import Loading from "../../Layout/Loading";
 
 const Post = ({
   post: {
     id,
     body,
     image_set,
-    profileid: { name, profile_picture },
     profileid,
     last_modified,
     hadees_ref,
@@ -84,10 +84,9 @@ const Post = ({
   const fetchHadeesRef = async () => {
     const dataAhadees = [];
 
-    const tempAhadees = JSON.parse(JSON.parse(hadees_ref));
+    const tempAhadees = hadees_ref ? JSON.parse(JSON.parse(hadees_ref)) : null;
 
-    tempAhadees &&
-      tempAhadees.length > 0 &&
+    if (tempAhadees !== null && tempAhadees.length > 0) {
       tempAhadees[0].map((x, i) =>
         axios
           .get(
@@ -97,6 +96,7 @@ const Post = ({
             dataAhadees.push(res.data[0]);
           }),
       );
+    }
     setAhadeesRef(dataAhadees);
     // console.log(dataAhadees);
   };
@@ -130,8 +130,8 @@ const Post = ({
   };
 
   useEffect(() => {
-    post && getPostReaction(id).then((res) => setLikes(res));
-    post && getPostComments(id).then((res) => setComments(res));
+    post && id && getPostReaction(id).then((res) => setLikes(res));
+    post && id && getPostComments(id).then((res) => setComments(res));
 
     post && fetchVerseRef();
     post && fetchHadeesRef();
@@ -141,146 +141,144 @@ const Post = ({
 
   return (
     <Fragment>
-      {profileid.id === user.id ||
-        (user.friend_list.find((x) => x.id === profileid.id) && (
-          <div className="post">
-            <div className="inline">
-              <div className="user-info">
-                <img
-                  alt="profile"
-                  src={
-                    profile_picture
-                      ? profile_picture
-                      : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
-                  }></img>
-                <Link to={{ pathname: "/profile", state: { user: profileid } }}>
-                  <div style={{ flexBasis: 1 }}>
-                    <h1>{name}</h1>
-                    <p>
-                      <Moment format="MMMM Do YYYY, h:mm:ss a">
-                        {last_modified}
-                      </Moment>
-                    </p>
-                  </div>{" "}
-                </Link>
+      {(user.friend_list.find((x) => x.id === profileid.id) ||
+        profileid.id === user.id) && (
+        <div className="post">
+          <div className="inline">
+            <div className="user-info">
+              <img
+                alt="profile"
+                src={
+                  profileid && profileid.profile_picture
+                    ? profileid.profile_picture
+                    : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
+                }></img>
+              <Link to={{ pathname: "/profile", state: { user: profileid } }}>
+                <div style={{ flexBasis: 1 }}>
+                  <h1>{profileid && profileid.name && profileid.name}</h1>
+                  <p>
+                    <Moment format="MMMM Do YYYY, h:mm:ss a">
+                      {last_modified}
+                    </Moment>
+                  </p>
+                </div>{" "}
+              </Link>
 
-                {updateText === "" && user && user.id === profileid.id && (
-                  <div style={{ marginLeft: "auto" }}>
-                    <Button
-                      id="fade-button"
-                      aria-controls={open ? "fade-menu" : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? "true" : undefined}
-                      onClick={handleClick}>
-                      <MoreVert />
-                    </Button>
-                    <Menu
-                      id="fade-menu"
-                      MenuListProps={{
-                        "aria-labelledby": "fade-button",
-                      }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}>
-                      <MenuItem
-                        onClick={() => {
-                          setConfirm(true);
-                          setAnchorEl(null);
-                        }}>
-                        Delete
-                      </MenuItem>
-                      <MenuItem
-                        onClick={() => {
-                          setUpdateText(body);
-                          setAnchorEl(null);
-                        }}>
-                        Edit
-                      </MenuItem>
-                    </Menu>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="post-items">
-              {post && updateText !== "" && (
-                <form onSubmit={(e) => onSubmit(e)}>
-                  <TextareaAutosize
-                    placeholder="Enter your text here!"
-                    value={updateText}
-                    onChange={(e) => setUpdateText(e.target.value)}
-                  />
-                  <div>
-                    <button type="submit" className="update">
-                      Update
-                    </button>
-                    <button
-                      className="cancel"
-                      onClick={() => setUpdateText("")}>
-                      <i className="fas fa-times"></i>
-                    </button>
-                  </div>
-                </form>
+              {updateText === "" && user && user.id === profileid.id && (
+                <div style={{ marginLeft: "auto" }}>
+                  <Button
+                    id="fade-button"
+                    aria-controls={open ? "fade-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}>
+                    <MoreVert />
+                  </Button>
+                  <Menu
+                    id="fade-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "fade-button",
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}>
+                    <MenuItem
+                      onClick={() => {
+                        setConfirm(true);
+                        setAnchorEl(null);
+                      }}>
+                      Delete
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        setUpdateText(body);
+                        setAnchorEl(null);
+                      }}>
+                      Edit
+                    </MenuItem>
+                  </Menu>
+                </div>
               )}
-
-              <p
-                onClick={() => setDisplayPost(true)}
-                className="cursor-pointer">
-                {body}
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}>
+            </div>
+          </div>
+          <div className="post-items">
+            {post && updateText !== "" && (
+              <form onSubmit={(e) => onSubmit(e)}>
+                <TextareaAutosize
+                  placeholder="Enter your text here!"
+                  value={updateText}
+                  onChange={(e) => setUpdateText(e.target.value)}
+                />
                 <div>
-                  {/* <h5 className="translated">
+                  <button type="submit" className="update">
+                    Update
+                  </button>
+                  <button className="cancel" onClick={() => setUpdateText("")}>
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+              </form>
+            )}
+
+            <p onClick={() => setDisplayPost(true)} className="cursor-pointer">
+              {body}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}>
+              <div>
+                {/* <h5 className="translated">
                     {translate !== "" && translate}
                   </h5> */}
-                  {/* 
+                {/* 
                 <h6 className='translate' onClick={() => translating(body)}>
                   Translate
                 </h6> */}
 
-                  <div className="references">
-                    {QuranRef.length > 0 &&
-                      QuranRef.map((x, i) => (
-                        <p
-                          key={i}
-                          style={{ cursor: "pointer" }}
-                          onClick={() => setPopQuran(x)}>
-                          {x.AyahNumber}, {x.SurahName}
-                        </p>
-                      ))}
-                  </div>
-                  <div className="references">
-                    {AhadeesRef.length > 0 &&
-                      AhadeesRef.map((x, i) => (
-                        <p
-                          key={i}
-                          style={{
-                            cursor: "pointer",
-                            fontSize: 12,
-                            marginTop: 0,
-                          }}
-                          onClick={() => setPopHadees(x)}>
-                          {x.HadithNumber}, {x.BookName}, {x.Sanad}
-                        </p>
-                      ))}
-                  </div>
-
-                  <h6 className="translate">Translate</h6>
+                <div className="references">
+                  {QuranRef.length > 0 &&
+                    QuranRef.map((x, i) => (
+                      <p
+                        key={i}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setPopQuran(x)}>
+                        {x.AyahNumber}, {x.SurahName}
+                      </p>
+                    ))}
                 </div>
-              </div>
+                <div className="references">
+                  {AhadeesRef.length > 0 &&
+                    AhadeesRef.map((x, i) => (
+                      <p
+                        key={i}
+                        style={{
+                          cursor: "pointer",
+                          fontSize: 12,
+                          marginTop: 0,
+                        }}
+                        onClick={() => setPopHadees(x)}>
+                        {x.HadithNumber}, {x.BookName}, {x.Sanad}
+                      </p>
+                    ))}
+                </div>
 
+                <h6 className="translate">Translate</h6>
+              </div>
+            </div>
+
+            {image_set && (
               <img
                 alt="profile"
                 src={image_set}
                 className="cursor-pointer"
                 onClick={() => setDisplayPost(true)}></img>
-            </div>
+            )}
           </div>
-        ))}
+        </div>
+      )}
 
       {displayPost && (
         <PostDisplay

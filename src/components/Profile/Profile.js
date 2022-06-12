@@ -16,6 +16,7 @@ import {
   Settings,
   Cancel,
   FiberManualRecord,
+  AddAPhoto,
 } from "@material-ui/icons";
 import Loading from "../Layout/Loading";
 
@@ -147,7 +148,11 @@ const Profile = ({
               </label>
             </Button>
           )}
-          <Grid container justifyContent="center" className="profile-head">
+          <Grid
+            container
+            justifyContent="center"
+            className="profile-head"
+            style={{ position: "relative" }}>
             <Grid item>
               <img
                 onClick={() => setShowProfilePic(true)}
@@ -169,6 +174,9 @@ const Profile = ({
                     : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
                 }
               />
+              {/* <button style={{ position: "absolute" }}>
+                <AddAPhoto />
+              </button> */}
             </Grid>
             <Grid item>
               <div>
@@ -223,8 +231,7 @@ const Profile = ({
                         marginLeft: 15,
                         alignItems: "center",
                       }}>
-                      <Phone />
-                      {profile.contact_number}
+                      <Phone />+{profile.contact_number}
                     </Button>
                   </Grid>
                 </Grid>

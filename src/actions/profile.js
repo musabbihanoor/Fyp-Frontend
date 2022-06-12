@@ -12,9 +12,35 @@ import {
   CREATE_EXPERIENCE,
   DELETE_EXPERIENCE,
   UPDATE_EXPERIENCE,
+  USER_LOADED,
+  AUTH_ERROR,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import { BASE_URL } from "./url";
+
+// Load User
+export const loadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  } else {
+    return;
+  }
+
+  try {
+    const res = await axios.get(`${BASE_URL}/account/currentuser/`);
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response,
+    });
+  }
+};
 
 //Get profiles
 export const getProfiles = () => async (dispatch) => {
@@ -79,13 +105,14 @@ export const updateProfile = (data, id) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data,
     });
+    dispatch(loadUser());
     return res;
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: err.response.data,
     });
-    return err;
+    return err.response;
   }
 };
 

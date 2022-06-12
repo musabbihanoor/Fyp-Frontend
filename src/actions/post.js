@@ -74,7 +74,7 @@ export const createPost = (formData) => async (dispatch) => {
       payload: res.data,
     });
 
-    return res.data;
+    return res;
 
     //dispatch(setAlert("Post Created", "success"));
   } catch (err) {
@@ -82,6 +82,8 @@ export const createPost = (formData) => async (dispatch) => {
       type: POST_ERROR,
       payload: { msg: err.response.data, status: err.response.status },
     });
+
+    return err.response;
   }
 };
 

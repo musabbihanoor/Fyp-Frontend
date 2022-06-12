@@ -25,14 +25,11 @@ const AddPost = ({ createPost, user, setData, data }) => {
   const [showImage, setShowImage] = useState("");
   const [addRef, setAddRef] = useState(false);
   const [errText, setErrText] = useState(false);
-  // const [errImg, setErrImg] = useState(false);
-  const [pop, setPop] = useState(false);
+  const [pop, setPop] = useState("");
   const [load, setLoad] = useState(false);
   const [QuranReference, setQuranRef] = useState([]);
   const [AhadeesReference, setAhadeesRef] = useState([]);
-
-  // console.log( JSON.parse("[1, 2,3, 4]"));
-  // console.log(JSON.stringify([1, 2, 3, 4]));
+  // const [error, setError] = useState({});
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -50,16 +47,6 @@ const AddPost = ({ createPost, user, setData, data }) => {
     QuranReference.map((x) => quranic_ref.push(x.Id));
     AhadeesReference.map((x) => hadees_ref.push(x.HadithNumber));
     AhadeesReference.map((x) => hadees_ref2.push(x.bookid));
-
-    // console.log(
-    //   JSON.stringify(
-    //     "[" +
-    //       JSON.stringify(hadees_ref) +
-    //       "," +
-    //       JSON.stringify(hadees_ref2) +
-    //       "]",
-    //   ),
-    // );
 
     const formData = new FormData();
     formData.append("body", body);
@@ -80,11 +67,26 @@ const AddPost = ({ createPost, user, setData, data }) => {
     setLoad(true);
 
     createPost(formData).then((res) => {
-      setPop(true);
-      setData([res, ...data]);
-      setLoad(false);
-      setAhadeesRef([]);
-      setQuranRef([]);
+      if (res.status === 200 || res.status === 201) {
+        setPop("Post Created");
+        setLoad(false);
+        setData([res.data, ...data]);
+        setAhadeesRef([]);
+        setQuranRef([]);
+      }
+
+      if (res.status === 400) {
+        console.log(res.data);
+        setLoad(false);
+        setPop(
+          res.data.result.hatespeech
+            ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
+            : res.data.result.islamophobia
+            ? "Your post contain islamophobia"
+            : "There's something wrong with your post",
+        );
+        // setError(res.data);
+      }
     });
     // });
   };
@@ -205,7 +207,7 @@ const AddPost = ({ createPost, user, setData, data }) => {
           setAhadeesRef={setAhadeesRef}
         />
       )}
-      {pop && <Popup func={() => setPop(false)} heading={"Post Created!"} />}
+      {pop !== "" && <Popup func={() => setPop("")} heading={pop} />}
       {load && <Loading />}
     </div>
   );

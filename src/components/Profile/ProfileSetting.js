@@ -91,8 +91,12 @@ const ProfileSetting = ({
     e.preventDefault();
     setLoading(true);
     updateProfile(formData, user.id).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
         history.push({ pathname: "/profile", state: { user: user } });
+        setLoading(false);
+      }
+      if (res.status === 400) {
         setLoading(false);
       }
     });
@@ -341,7 +345,7 @@ const ProfileSetting = ({
               onClick={() => setShowExperience(true)}
               color="inherit"
               variant="contained"
-              style={{ marginBottom: 10 }}>
+              style={{ marginBottom: 10, marginRight: 10 }}>
               Experience
             </Button>
             {user && !user.id_verified && (

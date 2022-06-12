@@ -169,6 +169,7 @@ div.absolute .absolute-content {
 div.absolute .absolute-content.popup {
   width: 500px;
   margin: 200px auto;
+  max-height: 50vh;
 }
 
 .popup h1 {
