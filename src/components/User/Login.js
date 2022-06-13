@@ -7,7 +7,7 @@ import { AccountCircle, LockRounded } from "@material-ui/icons";
 
 import { login } from "../../actions/auth";
 
-const Login = ({ setRegister, login, auth: { error }, history }) => {
+const Login = ({ setShow, login, auth: { error }, history }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -94,16 +94,15 @@ const Login = ({ setRegister, login, auth: { error }, history }) => {
         </div>
         <div style={{ height: 20, marginTop: 30 }}>
           Interested in joining?{" "}
-          <Button onClick={() => setRegister(true)}>Register</Button>
+          <Button onClick={() => setShow("register")}>Register</Button>
         </div>
       </div>
       <div>
         <Grid container justify="center" spacing={2}>
           <Grid item>
-            <Button color="primary">Go to community page</Button>
-          </Grid>
-          <Grid item>
-            <Button variant="outlined">Forgot password?</Button>
+            <Button onClick={() => setShow("reset")} variant="outlined">
+              Forgot password?
+            </Button>
           </Grid>
         </Grid>
       </div>

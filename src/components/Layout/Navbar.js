@@ -17,6 +17,7 @@ import {
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { MenuBook, Group, Home, Settings } from "@material-ui/icons";
+import SearchBar from "./SearchBar";
 
 const Navbar = ({
   setNav,
@@ -182,9 +183,13 @@ const Navbar = ({
                 noWrap
                 component="div"
                 sx={{ display: { xs: "none", sm: "block" } }}>
-                <Link to="/timeline">NIZAM E ILAHI</Link>
+                <Link to="/timeline" onClick={() => setNav(1)}>
+                  NIZAM E ILAHI
+                </Link>
               </Typography>
-              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ flexGrow: 1 }}>
+                <SearchBar />
+              </Box>
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 {location.pathname === "/timeline" && (
                   <>

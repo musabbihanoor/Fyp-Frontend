@@ -5,9 +5,10 @@ import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import Login from "./Login";
 import Register from "./Register";
+import ResetPassword from "./ResetPassword";
 
 const Landing = ({ auth: { isAuthenticated, loading, user }, history }) => {
-  const [register, setRegister] = useState(false);
+  const [show, setShow] = useState("login");
 
   useEffect(() => {
     // Redirect if logged out
@@ -37,11 +38,9 @@ const Landing = ({ auth: { isAuthenticated, loading, user }, history }) => {
           alignItems="center"
           direction="column"
           justify="space-between">
-          {!register ? (
-            <Login setRegister={setRegister} />
-          ) : (
-            <Register setRegister={setRegister} />
-          )}
+          {show === "login" && <Login setShow={setShow} />}
+          {show === "register" && <Register setShow={setShow} />}
+          {show === "reset" && <ResetPassword setShow={setShow} />}
         </Grid>
       </Grid>
     </div>

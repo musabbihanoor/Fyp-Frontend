@@ -8,7 +8,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Menu, MenuItem } from "@material-ui/core";
 import {
   LocationOn,
   Email,
@@ -57,9 +57,20 @@ const Profile = ({
   const [loading, setLoading] = useState(false);
   const [showCover, setShowCover] = useState(null);
   const [pop, setPop] = useState("");
+  const [showImage, setShowImage] = useState(null);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const onCoverChange = (e) => {
     e.preventDefault();
+    // setLoading(true);
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setShowCover(
@@ -69,7 +80,12 @@ const Profile = ({
     );
     var formData = new FormData();
     formData.append("cover_picture", e.target.files[0]);
-    updateProfile(formData, user.id).then((res) => console.log(res));
+    updateProfile(formData, user.id).then((res) => {
+      console.log(res.status);
+      // if (res.status === "200" || res.status === "201") {
+      //   setLoading(false);
+      // }
+    });
   };
 
   const unfriend = () => {};
@@ -93,6 +109,26 @@ const Profile = ({
       setPop("Friend Request Sent"),
     );
   };
+
+  const changeImage = (e) => {
+    console.log("here");
+    setLoading(true);
+    var binaryData = [];
+    binaryData.push(e.target.files[0]);
+    setShowImage(
+      window.URL.createObjectURL(
+        new Blob(binaryData, { type: "application/zip" }),
+      ),
+    );
+    var formData = new FormData();
+    formData.append("profile_picture", e.target.files[0]);
+    updateProfile(formData, user.id).then(
+      (res) =>
+        (res.status === "200" || res.status === "201") && setLoading(false),
+    );
+  };
+
+  const removeImage = () => {};
 
   useEffect(() => {
     // Redirect if logged out
@@ -120,10 +156,10 @@ const Profile = ({
             }}
             alt="cover"
             src={
-              profile.cover_picture
-                ? profile.cover_picture
-                : showCover
+              showCover
                 ? showCover
+                : profile.cover_picture
+                ? profile.cover_picture
                 : "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png"
             }
           />
@@ -148,12 +184,8 @@ const Profile = ({
               </label>
             </Button>
           )}
-          <Grid
-            container
-            justifyContent="center"
-            className="profile-head"
-            style={{ position: "relative" }}>
-            <Grid item>
+          <Grid container justifyContent="center" className="profile-head">
+            <Grid item style={{ position: "relative" }}>
               <img
                 onClick={() => setShowProfilePic(true)}
                 style={{
@@ -169,14 +201,79 @@ const Profile = ({
                 }}
                 alt="profile"
                 src={
-                  profile.profile_picture
+                  showImage
+                    ? showImage
+                    : profile.profile_picture
                     ? profile.profile_picture
                     : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
                 }
               />
-              {/* <button style={{ position: "absolute" }}>
+              <button
+                onClick={handleClick}
+                style={{
+                  position: "absolute",
+                  left: 10,
+                  bottom: 10,
+                  backgroundColor: "rgba(255,255,255,0.7)",
+                  border: "none",
+                  padding: 10,
+                  borderRadius: 50,
+                }}>
                 <AddAPhoto />
-              </button> */}
+              </button>
+
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      left: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "rgba(255,255,255,0.7)",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+                <button>
+                  <label>
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      value={null}
+                      onChange={(e) => {
+                        console.log(e.target.files[0]);
+                      }}
+                    />
+                    Upload Picture
+                  </label>
+                </button>
+
+                <MenuItem onClick={() => removeImage()}>
+                  Remove Picture
+                </MenuItem>
+              </Menu>
             </Grid>
             <Grid item>
               <div>

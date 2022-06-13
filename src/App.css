@@ -55,78 +55,6 @@ a:hover {
   color: #222222;
 }
 
-/* Dropdown */
-
-/* .dropdown {
-  display: inline-block;
-  position: relative;
-  float: right;
-}
-
-.dropdown .dd-button {
-  display: inline-block;
-  border-radius: 20px;
-  padding: 10px 20px;
-  background-color: #ffffff;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.dropdown .dd-button:hover {
-  background-color: #eeeeee;
-}
-
-.dropdown .dd-input {
-  display: none;
-}
-
-.dropdown .dd-menu {
-  position: absolute;
-  top: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 0;
-  margin: 2px 0 0 0;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  list-style-type: none;
-}
-
-.dropdown .dd-input + .dd-menu {
-  display: none;
-}
-
-.dropdown .dd-input:checked + .dd-menu {
-  display: block;
-}
-
-.dropdown .dd-menu li {
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.dropdown .dd-menu li button {
-  padding: 10px 20px;
-  border: none;
-  background-color: transparent;
-}
-
-.dropdown .dd-menu li:hover {
-  background-color: #f6f6f6;
-}
-
-.dropdown .dd-menu li a {
-  display: block;
-  margin: -10px -20px;
-  padding: 10px 20px;
-} */
-
-/* hover  */
-/* 
-.hover-blue {
-  color: #96b7c4
-} */
-
 .hover-blue:hover {
   background-color: #a2c1e0 !important;
   color: #fff !important;
@@ -267,4 +195,339 @@ textarea.error {
 
 .MuiAppBar-root {
   z-index: 111111;
+}
+
+.cssload-loader {
+  display: block;
+  margin: 500px auto;
+  width: 41px;
+  height: 41px;
+  position: relative;
+  border: 6px solid #f50057;
+  animation: cssload-loader 2s infinite ease;
+  -o-animation: cssload-loader 2s infinite ease;
+  -ms-animation: cssload-loader 2s infinite ease;
+  -webkit-animation: cssload-loader 2s infinite ease;
+  -moz-animation: cssload-loader 2s infinite ease;
+}
+
+.cssload-loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #f50057;
+  animation: cssload-loader-inner 2s infinite ease-in;
+  -o-animation: cssload-loader-inner 2s infinite ease-in;
+  -ms-animation: cssload-loader-inner 2s infinite ease-in;
+  -webkit-animation: cssload-loader-inner 2s infinite ease-in;
+  -moz-animation: cssload-loader-inner 2s infinite ease-in;
+}
+
+@keyframes cssload-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes cssload-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes cssload-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes cssload-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes cssload-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cssload-loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+@-o-keyframes cssload-loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+@-ms-keyframes cssload-loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+@-webkit-keyframes cssload-loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+@-moz-keyframes cssload-loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+.searchbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.searchbar .searched {
+  position: absolute;
+  width: 70%;
+  background-color: #fff;
+  top: 43px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.searchbar form {
+  width: 50%;
+  position: relative;
+}
+
+.searchbar input {
+  width: 100%;
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333434;
+}
+
+.searchbar i {
+  position: absolute;
+  top: 10px;
+  right: -20px;
+}
+
+.searchbar .searched hr {
+  border: 1px solid #eee;
+  margin: 0 10px;
+}
+
+.searchbar .searched button {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.searchbar .searched button:hover {
+  background-color: #eaf1f7;
+}
+
+.searchbar .searched img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.searchbar .searchbar h6 {
+  text-align: left;
+}
+
+.searchbar .detail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.searchbar p,
+.searchbar h6 {
+  margin: 5px 10px;
+  color: #222222;
+  font-weight: 700;
+  font-family: Roboto, "sans-serif";
+}
+
+.searchbar p {
+  font-size: 15px;
+}
+
+.searchbar h6 {
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 0;
 }

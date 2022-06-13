@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import {
-  Grid,
   TextField,
   Button,
   InputAdornment,
@@ -23,7 +22,7 @@ import {
 
 import { register } from "../../actions/auth";
 
-const Register = ({ setRegister, auth: { error }, register }) => {
+const Register = ({ setShow, auth: { error }, register }) => {
   // const error = {
   // username: ["This field is required."],
   // email: ["This field is required."],
@@ -44,6 +43,7 @@ const Register = ({ setRegister, auth: { error }, register }) => {
     password: "",
     password2: "",
     country: "",
+    verified: true,
   });
 
   const {
@@ -251,15 +251,8 @@ const Register = ({ setRegister, auth: { error }, register }) => {
         </div>
         <div style={{ height: 20, marginTop: 30 }}>
           Already a user?{" "}
-          <Button onClick={() => setRegister(false)}>Login</Button>
+          <Button onClick={() => setShow("login")}>Login</Button>
         </div>
-      </div>
-      <div>
-        <Grid container justify="center" spacing={2}>
-          <Grid item>
-            <Button color="primary">Go to community page</Button>
-          </Grid>
-        </Grid>
       </div>
     </>
   );

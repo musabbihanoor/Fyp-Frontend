@@ -5,6 +5,7 @@ import Post from "./Post";
 import { getPosts } from "../../../actions/post";
 import "../Timeline.css";
 import Loading from "../../Layout/Loading";
+import { FileCopyTwoTone } from "@material-ui/icons";
 
 const Posts = ({
   getPosts,
@@ -29,12 +30,38 @@ const Posts = ({
 
   return (
     <Fragment>
-      {data &&
+      {data.length > 0 ? (
         !loading &&
         !load &&
         data.map((post) => (
           <Post key={post.id} post={post} data={data} setData={setData} />
-        ))}
+        ))
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+          <p
+            style={{
+              fontSize: 50,
+              fontWeight: "900",
+              textTransform: "uppercase",
+              color: "#ccc",
+            }}>
+            !No posts
+          </p>
+          <FileCopyTwoTone
+            style={{
+              fontSize: 200,
+              fontWeight: "900",
+              textTransform: "uppercase",
+              color: "#ccc",
+            }}
+          />
+        </div>
+      )}
       {load && <Loading />}
     </Fragment>
   );

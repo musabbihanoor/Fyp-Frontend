@@ -12,7 +12,6 @@ import {
   createPostComment,
   deletePostComment,
 } from "../../../actions/post";
-import { translation, tags } from "../../../actions/AiModels";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PostDisplay from "./PostDisplay";
 import Confirm from "../../Popup/Confirm";
@@ -43,7 +42,6 @@ const Post = ({
   getPostComments,
   createPostComment,
   deletePostComment,
-  translation,
   tags,
   data,
   setData,
@@ -264,8 +262,6 @@ const Post = ({
                       </p>
                     ))}
                 </div>
-
-                <h6 className="translate">Translate</h6>
               </div>
             </div>
 
@@ -293,7 +289,6 @@ const Post = ({
           user={user}
           createPostComment={createPostComment}
           deletePostComment={deletePostComment}
-          translation={translation}
           tags={tags}
         />
       )}
@@ -345,8 +340,6 @@ Post.propTypes = {
   createPostComment: PropTypes.func.isRequired,
   deletePostComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  translation: PropTypes.func.isRequired,
-  tags: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -362,6 +355,4 @@ export default connect(mapStateToProps, {
   getPostComments,
   createPostComment,
   deletePostComment,
-  translation,
-  tags,
 })(Post);

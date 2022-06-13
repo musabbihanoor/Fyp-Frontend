@@ -181,3 +181,77 @@ export const verifyId = (data) => async (dispatch) => {
     return err.response;
   }
 };
+
+// send reset password request
+export const requestResetPassword = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/account/forgot_password/${username}/`,
+    );
+
+    console.log(res);
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response.data,
+    });
+    console.log(err);
+    return err.response;
+  }
+};
+
+// send reset password code
+export const requestResetCode = (data, username) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const res = await axios.post(
+      `${BASE_URL}/account/forgot_password/${username}/`,
+      data,
+      config,
+    );
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response.data,
+    });
+    console.log(err);
+    return err.response;
+  }
+};
+
+// reset password
+export const resetPassword = (data) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const res = await axios.post(
+      `${BASE_URL}/account/reset_password/`,
+      data,
+      config,
+    );
+
+    dispatch(loadUser());
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: err.response.data,
+    });
+    console.log(err);
+    return err.response;
+  }
+};

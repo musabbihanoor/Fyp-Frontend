@@ -105,7 +105,7 @@ export const updateProfile = (data, id) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data,
     });
-    dispatch(loadUser());
+
     return res;
   } catch (err) {
     dispatch({
