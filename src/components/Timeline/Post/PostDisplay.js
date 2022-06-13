@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Grid, TextField } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { Send } from "@material-ui/icons";
 import Comment from "./Comment";
 import DisplayLikes from "./DisplayLikes";
+import Loading from "../../Layout/Loading";
+import Popup from "../../Popup/Popup";
 
 const PostDisplay = ({
   post: { body, image_set, id, profileid },
@@ -17,25 +20,32 @@ const PostDisplay = ({
   comments,
   setComments,
   deletePostComment,
-  translation,
-  tags,
+  getProfile,
+  QuranRef,
+  setPopQuran,
+  AhadeesRef,
+  setPopHadees,
+  // translation,
+  // tags,
 }) => {
   const [currentLike, setCurrentLike] = useState(null);
   const [displayLikes, setDisplayLikes] = useState(false);
   const [commentText, setCommentText] = useState("");
   const [commentError, setCommentError] = useState(false);
-  const [translate, setTranslate] = useState("");
+  const [load, setLoad] = useState(false);
+  const [pop, setPop] = useState("");
+  // const [translate, setTranslate] = useState("");
   // const [tag, setTag] = useState([]);
 
-  const translating = (body) => {
-    translation({
-      text: body,
-      dest: "ur",
-    }).then((res) => {
-      console.log(res);
-      setTranslate(res.data.output);
-    });
-  };
+  // const translating = (body) => {
+  //   translation({
+  //     text: body,
+  //     dest: "ur",
+  //   }).then((res) => {
+  //     console.log(res);
+  //     setTranslate(res.data.output);
+  //   });
+  // };
 
   // const fetchingTag = (body) => {
   //   tags({ text: body }).then((res) => {
@@ -45,33 +55,57 @@ const PostDisplay = ({
   // };
 
   const like = () => {
+    setLoad(true);
     createPostReactions({ text: "1", postid: id }).then((res) => {
-      setCurrentLike(res);
-      setLikes([...likes, res]);
+      setCurrentLike(res.data);
+      setLikes([...likes, res.data]);
+      setLoad(false);
     });
   };
 
   const dislike = (e) => {
     e.preventDefault();
-    deletePostReactions(currentLike.id);
-    setCurrentLike(null);
-    setLikes(likes.filter((x) => x.id !== currentLike.id));
+    setLoad(true);
+    deletePostReactions(currentLike.id).then((res) => {
+      setCurrentLike(null);
+      setLikes(likes.filter((x) => x.id !== currentLike.id));
+      setLoad(false);
+    });
   };
 
   const deleteComment = (e, cid) => {
     e.preventDefault();
-    deletePostComment(cid);
-    setComments(comments.filter((x) => x.id !== cid));
+    setLoad(true);
+    deletePostComment(cid).then((res) => {
+      setComments(comments.filter((x) => x.id !== cid));
+      setLoad(false);
+    });
   };
 
   const submitComment = (e) => {
     e.preventDefault();
 
+    setLoad(true);
     if (commentText !== "") {
       createPostComment({ text: commentText, postid: id }).then((res) => {
-        setComments([res, ...comments]);
-        setCommentText("");
-        setCommentError(false);
+        if (res.status === 200 || res.status === 201) {
+          setComments([res.data, ...comments]);
+          setCommentText("");
+          setCommentError(false);
+          setLoad(false);
+        }
+
+        if (res.status === 400) {
+          console.log(res.data);
+          setLoad(false);
+          setPop(
+            res.data.result.hatespeech
+              ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
+              : res.data.result.islamophobia
+              ? "Your post contain islamophobia"
+              : "There's something wrong with your post",
+          );
+        }
       });
     } else {
       setCommentError(true);
@@ -81,7 +115,6 @@ const PostDisplay = ({
   useEffect(() => {
     const data = likes.find((x) => x.profile.id === user.id);
     likes && data !== undefined && setCurrentLike(data);
-    // post && fetchingTag(post.body);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -112,10 +145,18 @@ const PostDisplay = ({
             sm={image_set && 6}
             style={{ padding: "10px 20px" }}
             direction="column">
-            <div className="user-info">
-              <img alt="profile" src={profileid.profile_picture}></img>
-              <h1>{profileid.name}</h1>
-            </div>
+            <Link to={{ pathname: "/profile", state: { user: profileid } }}>
+              <div className="user-info">
+                <img
+                  alt="profile"
+                  src={
+                    profileid.profile_picture
+                      ? profileid.profile_picture
+                      : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
+                  }></img>
+                <h1>{profileid.name}</h1>
+              </div>
+            </Link>
             <p>{body}</p>
             {/* <div className="tags">
               {tag.map((x, i) => (
@@ -124,10 +165,38 @@ const PostDisplay = ({
                 </h4>
               ))}
             </div> */}
-            <h5 className="translated">{translate !== "" && translate}</h5>
-            <h6 className="translate" onClick={() => translating(body)}>
+            {/* <h5 className="translated">{translate !== "" && translate}</h5> */}
+            {/* <h6 className="translate" onClick={() => translating(body)}>
               Translate
-            </h6>
+            </h6> */}
+
+            <div className="references">
+              {QuranRef.length > 0 &&
+                QuranRef.map((x, i) => (
+                  <p
+                    key={i}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setPopQuran(x)}>
+                    {x.AyahNumber}, {x.SurahName}
+                  </p>
+                ))}
+            </div>
+            <div className="references">
+              {AhadeesRef.length > 0 &&
+                AhadeesRef.map((x, i) => (
+                  <p
+                    key={i}
+                    style={{
+                      cursor: "pointer",
+                      fontSize: 12,
+                      marginTop: 0,
+                    }}
+                    onClick={() => setPopHadees(x)}>
+                    {x.HadithNumber}, {x.BookName}, {x.Sanad}
+                  </p>
+                ))}
+            </div>
+
             <div className="post-options">
               {currentLike ? (
                 <button
@@ -148,11 +217,12 @@ const PostDisplay = ({
                 </button>
               )}
             </div>
+
             {likes && (
               <p
-                style={{ cursor: "pointer" }}
-                onClick={() => setDisplayLikes(true)}>
-                {likes.length} likes
+                style={{ cursor: likes.length > 0 && "pointer" }}
+                onClick={() => likes.length > 0 && setDisplayLikes(true)}>
+                {likes.length} {likes.length > 1 ? "likes" : "like"}
               </p>
             )}
             <hr />
@@ -177,7 +247,11 @@ const PostDisplay = ({
                 />
                 <button
                   onClick={(e) => submitComment(e)}
-                  style={{ color: "#3F51B5" }}>
+                  style={{
+                    color: "#3F51B5",
+                    backgroundColor: "transparent",
+                    border: "none",
+                  }}>
                   <Send />
                 </button>
               </form>
@@ -189,6 +263,8 @@ const PostDisplay = ({
                     comment={x}
                     deleteComment={deleteComment}
                     user={user}
+                    getProfile={getProfile}
+                    setLoading={setLoad}
                   />
                 ))}
             </div>
@@ -196,8 +272,17 @@ const PostDisplay = ({
         </Grid>
       </div>
       {displayLikes && (
-        <DisplayLikes setDisplayLikes={setDisplayPost} likes={likes} />
+        <DisplayLikes
+          setDisplayLikes={setDisplayLikes}
+          likes={likes}
+          getProfile={getProfile}
+          setLoading={setLoad}
+        />
       )}
+
+      {pop !== "" && <Popup func={() => setPop("")} heading={pop} />}
+
+      {load && <Loading />}
     </div>
   );
 };

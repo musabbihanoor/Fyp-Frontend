@@ -19,6 +19,7 @@ import {
   AddAPhoto,
 } from "@material-ui/icons";
 import Loading from "../Layout/Loading";
+import Confirm from "../Popup/Confirm";
 
 import {
   getProfile,
@@ -58,19 +59,14 @@ const Profile = ({
   const [showCover, setShowCover] = useState(null);
   const [pop, setPop] = useState("");
   const [showImage, setShowImage] = useState(null);
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [showMenu1, setShowMenu1] = useState(false);
+  const [showMenu2, setShowMenu2] = useState(false);
+  const [noImage, setNoImage] = useState(false);
+  const [noCover, setNoCover] = useState(false);
 
   const onCoverChange = (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setShowMenu2(false);
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setShowCover(
@@ -80,12 +76,7 @@ const Profile = ({
     );
     var formData = new FormData();
     formData.append("cover_picture", e.target.files[0]);
-    updateProfile(formData, user.id).then((res) => {
-      console.log(res.status);
-      // if (res.status === "200" || res.status === "201") {
-      //   setLoading(false);
-      // }
-    });
+    updateProfile(formData, user.id);
   };
 
   const unfriend = () => {};
@@ -111,8 +102,8 @@ const Profile = ({
   };
 
   const changeImage = (e) => {
-    console.log("here");
-    setLoading(true);
+    e.preventDefault();
+
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setShowImage(
@@ -122,13 +113,31 @@ const Profile = ({
     );
     var formData = new FormData();
     formData.append("profile_picture", e.target.files[0]);
-    updateProfile(formData, user.id).then(
-      (res) =>
-        (res.status === "200" || res.status === "201") && setLoading(false),
+    setShowMenu1(false);
+    updateProfile(formData, user.id);
+  };
+
+  const removeImage = (e) => {
+    var formData = new FormData();
+    formData.append("profile_picture", "");
+    updateProfile(formData, user.id);
+    setNoImage(false);
+    setShowMenu1(false);
+    setShowImage(
+      "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg",
     );
   };
 
-  const removeImage = () => {};
+  const removeCover = (e) => {
+    var formData = new FormData();
+    formData.append("cover_picture", "");
+    updateProfile(formData, user.id);
+    setShowMenu2(false);
+    setNoCover(false);
+    setShowCover(
+      "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png",
+    );
+  };
 
   useEffect(() => {
     // Redirect if logged out
@@ -164,30 +173,52 @@ const Profile = ({
             }
           />
           {profile.id === auth.user.id && (
-            <Button
-              variant="contained"
-              style={{
-                position: "absolute",
-                top: 450,
-                right: 50,
-              }}>
-              <label
+            <div className="menu" style={{ position: "relative" }}>
+              <Button
+                onClick={() => setShowMenu2(!showMenu2)}
+                variant="contained"
                 style={{
-                  cursor: "pointer",
+                  position: "absolute",
+                  top: "-100px",
+                  right: 50,
                 }}>
-                <input
-                  type="file"
-                  style={{ display: "none" }}
-                  onChange={(e) => onCoverChange(e)}
-                />
-                Upload
-              </label>
-            </Button>
+                <label
+                  style={{
+                    cursor: "pointer",
+                  }}>
+                  Upload
+                </label>
+              </Button>
+              {showMenu2 && (
+                <div className="list" style={{ top: "-60px", right: 50 }}>
+                  <label>
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={(e) => onCoverChange(e)}
+                    />
+                    Upload cover
+                  </label>
+                  <button
+                    className={
+                      !showCover && !profile.cover_picture && "disabled"
+                    }
+                    onClick={() =>
+                      (showCover || profile.cover_picture) && setNoCover(true)
+                    }>
+                    Remove cover
+                  </button>
+                </div>
+              )}
+            </div>
           )}
           <Grid container justifyContent="center" className="profile-head">
             <Grid item style={{ position: "relative" }}>
               <img
-                onClick={() => setShowProfilePic(true)}
+                onClick={() =>
+                  (showImage || profile.profile_picture) &&
+                  setShowProfilePic(true)
+                }
                 style={{
                   width: "200px",
                   height: "200px",
@@ -197,7 +228,7 @@ const Profile = ({
                   border: "1px solid grey",
                   padding: 3,
                   background: "#fff",
-                  cursor: "pointer",
+                  cursor: showImage && "pointer",
                 }}
                 alt="profile"
                 src={
@@ -208,72 +239,45 @@ const Profile = ({
                     : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
                 }
               />
-              <button
-                onClick={handleClick}
-                style={{
-                  position: "absolute",
-                  left: 10,
-                  bottom: 10,
-                  backgroundColor: "rgba(255,255,255,0.7)",
-                  border: "none",
-                  padding: 10,
-                  borderRadius: 50,
-                }}>
-                <AddAPhoto />
-              </button>
-
-              <Menu
-                anchorEl={anchorEl}
-                id="account-menu"
-                open={open}
-                onClose={handleClose}
-                onClick={handleClose}
-                PaperProps={{
-                  elevation: 0,
-                  sx: {
-                    overflow: "visible",
-                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                    mt: 1.5,
-                    "& .MuiAvatar-root": {
-                      width: 32,
-                      height: 32,
-                      ml: -0.5,
-                      mr: 1,
-                    },
-                    "&:before": {
-                      content: '""',
-                      display: "block",
+              {profile.id === auth.user.id && (
+                <div className="menu">
+                  <button
+                    onClick={() => setShowMenu1(!showMenu1)}
+                    style={{
                       position: "absolute",
-                      top: 0,
-                      left: 14,
-                      width: 10,
-                      height: 10,
-                      bgcolor: "rgba(255,255,255,0.7)",
-                      transform: "translateY(-50%) rotate(45deg)",
-                      zIndex: 0,
-                    },
-                  },
-                }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
-                <button>
-                  <label>
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      value={null}
-                      onChange={(e) => {
-                        console.log(e.target.files[0]);
-                      }}
-                    />
-                    Upload Picture
-                  </label>
-                </button>
-
-                <MenuItem onClick={() => removeImage()}>
-                  Remove Picture
-                </MenuItem>
-              </Menu>
+                      left: 10,
+                      bottom: 10,
+                      backgroundColor: "rgba(255,255,255,0.7)",
+                      border: "none",
+                      padding: 10,
+                      borderRadius: 50,
+                    }}>
+                    <AddAPhoto />
+                  </button>
+                  {showMenu1 && (
+                    <div className="list">
+                      <label>
+                        <input
+                          type="file"
+                          style={{ display: "none" }}
+                          onChange={(e) => changeImage(e)}
+                        />
+                        Upload picture
+                      </label>
+                      <button
+                        className={
+                          !showImage && !profile.profile_picture && "disabled"
+                        }
+                        onClick={() =>
+                          (showImage || profile.profile_picture) &&
+                          setNoImage(true)
+                        }>
+                        Remove picture
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </Grid>
             <Grid item>
               <div>
@@ -306,7 +310,7 @@ const Profile = ({
                         alignItems: "center",
                       }}>
                       <LocationOn />
-                      {profile.city && <span>{profile.city}</span>}
+                      {profile.city && <span>{profile.city + ", "}</span>}
                       <span>{profile.country}</span>
                     </Button>
                   </Grid>
@@ -417,10 +421,7 @@ const Profile = ({
       )}
 
       {showProfilePic && (
-        <Image
-          src={user.profile_picture && user.profile_picture}
-          setShowImage={setShowProfilePic}
-        />
+        <Image src={showImage} setShowImage={setShowProfilePic} />
       )}
 
       {showVerse && <VerseList setShowVerse={setShowVerse} />}
@@ -434,6 +435,21 @@ const Profile = ({
             history.go();
           }}
           heading={pop}
+        />
+      )}
+
+      {noImage && (
+        <Confirm
+          heading="Do you want to remove profile picture?"
+          accept={(e) => removeImage(e)}
+          decline={() => setNoImage(false)}
+        />
+      )}
+      {noCover && (
+        <Confirm
+          heading="Do you want to remove cover picture?"
+          accept={(e) => removeCover(e)}
+          decline={() => setNoCover(false)}
         />
       )}
     </Fragment>

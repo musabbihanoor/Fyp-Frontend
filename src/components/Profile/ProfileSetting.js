@@ -359,7 +359,7 @@ const ProfileSetting = ({
             )}
           </Grid>
 
-          <Grid
+          {/* <Grid
             item
             style={{
               display: "flex",
@@ -437,11 +437,11 @@ const ProfileSetting = ({
                 </Button>
               </div>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           style={{ margin: "10px 0" }}
           onClick={(e) => onSubmit(e)}>
           Submit Change

@@ -162,12 +162,14 @@ export const createPostReactions = (formData) => async (dispatch) => {
       type: UPDATE_POST,
       payload: res.data,
     });
-    return res.data;
+    return res;
   } catch (err) {
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.data, status: err.response.status },
     });
+
+    return err.response;
   }
 };
 
@@ -185,11 +187,15 @@ export const deletePostReactions = (id) => async (dispatch) => {
       payload: res.data,
     });
     console.log(res.data);
+
+    return res;
   } catch (err) {
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.data, status: err.response.status },
     });
+
+    return err.response;
   }
 };
 
@@ -215,11 +221,15 @@ export const updatePostReactions = (id, formData) => async (dispatch) => {
       type: UPDATE_POST,
       payload: res.data,
     });
+
+    return res;
   } catch (err) {
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.data, status: err.response.status },
     });
+
+    return err.response;
   }
 };
 
@@ -292,12 +302,14 @@ export const createPostComment = (formData) => async (dispatch) => {
       payload: res.data,
     });
     console.log(res);
-    return res.data;
+    return res;
   } catch (err) {
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.data, status: err.response.status },
     });
+
+    return err.response;
   }
 };
 

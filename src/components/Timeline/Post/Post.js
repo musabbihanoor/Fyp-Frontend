@@ -12,6 +12,7 @@ import {
   createPostComment,
   deletePostComment,
 } from "../../../actions/post";
+import { getProfile } from "../../../actions/profile";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PostDisplay from "./PostDisplay";
 import Confirm from "../../Popup/Confirm";
@@ -45,6 +46,7 @@ const Post = ({
   tags,
   data,
   setData,
+  getProfile,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -290,6 +292,11 @@ const Post = ({
           createPostComment={createPostComment}
           deletePostComment={deletePostComment}
           tags={tags}
+          getProfile={getProfile}
+          QuranRef={QuranRef}
+          setPopQuran={setPopQuran}
+          AhadeesRef={AhadeesRef}
+          setPopHadees={setPopHadees}
         />
       )}
 
@@ -340,6 +347,7 @@ Post.propTypes = {
   createPostComment: PropTypes.func.isRequired,
   deletePostComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -355,4 +363,5 @@ export default connect(mapStateToProps, {
   getPostComments,
   createPostComment,
   deletePostComment,
+  getProfile,
 })(Post);

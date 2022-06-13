@@ -58,7 +58,14 @@ const SearchBar = ({ getProfiles, getProfile }) => {
                         getProfile(x.id).then((res) => setLoading(false));
                         setSearchText("");
                       }}>
-                      <img alt="profile" src={x.profile_picture} />
+                      <img
+                        alt="profile"
+                        src={
+                          x.profile_picture
+                            ? x.profile_picture
+                            : "https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"
+                        }
+                      />
                       <div className="detail">
                         <p>{x.name}</p>
                         <h6>
