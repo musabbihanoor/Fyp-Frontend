@@ -8,7 +8,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Grid, Button, Menu, MenuItem } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import {
   LocationOn,
   Email,
@@ -28,6 +28,7 @@ import {
   updateProfile,
   acceptFriendRequest,
   createFriendRequest,
+  cancelFriendRequest,
 } from "../../actions/profile";
 
 import ProfilePosts from "./ProfilePosts";
@@ -48,6 +49,7 @@ const Profile = ({
   profile: { profile, educations, experiences },
   createFriendRequest,
   acceptFriendRequest,
+  cancelFriendRequest,
 }) => {
   const location = useLocation();
   const history = useHistory();
@@ -82,23 +84,35 @@ const Profile = ({
   const unfriend = () => {};
 
   const acceptRequest = () => {
-    acceptFriendRequest(profile.id, "accept").then((res) =>
-      setPop("Friend Request Accepted"),
-    );
+    setLoading(true);
+    acceptFriendRequest(profile.id, "accept").then((res) => {
+      setPop("Friend Request Accepted");
+      setLoading(false);
+    });
   };
 
-  // const rejectRequest = () => {
-  //   acceptFriendRequest(profile.id, "reject").then((res) =>
-  //     setPop("Friend Request Rejected"),
-  //   );
-  // };
+  const rejectRequest = () => {
+    setLoading(true);
+    acceptFriendRequest(profile.id, "reject").then((res) => {
+      setPop("Friend Request Rejected");
+      setLoading(false);
+    });
+  };
 
-  const cancelRequest = () => {};
+  const cancelRequest = () => {
+    setLoading(true);
+    cancelFriendRequest(profile.id).then((res) => {
+      setPop("Friend Request Cancelled");
+      setLoading(false);
+    });
+  };
 
   const addFriend = async () => {
-    createFriendRequest(profile.id).then((res) =>
-      setPop("Friend Request Sent"),
-    );
+    setLoading(true);
+    createFriendRequest(profile.id).then((res) => {
+      setPop("Friend Request Sent");
+      setLoading(false);
+    });
   };
 
   const changeImage = (e) => {
@@ -350,12 +364,21 @@ const Profile = ({
                   <Cancel /> Unfriend
                 </Button>
               ) : auth.user.request_list.find((x) => x.id === profile.id) ? (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => acceptRequest()}>
-                  Accept Request
-                </Button>
+                <>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => acceptRequest()}>
+                    Accept Request
+                  </Button>
+                  <Button
+                    style={{ marginLeft: 10 }}
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => rejectRequest()}>
+                    Reject Request
+                  </Button>
+                </>
               ) : profile.request_list.find((x) => x.id === auth.user.id) ? (
                 <Button
                   variant="contained"
@@ -465,6 +488,7 @@ Profile.propTypes = {
   updateProfile: PropTypes.func.isRequired,
   createFriendRequest: PropTypes.func.isRequired,
   acceptFriendRequest: PropTypes.func.isRequired,
+  cancelFriendRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -479,4 +503,5 @@ export default connect(mapStateToProps, {
   updateProfile,
   createFriendRequest,
   acceptFriendRequest,
+  cancelFriendRequest,
 })(withRouter(Profile));

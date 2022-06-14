@@ -28,3 +28,11 @@ export const GET_EXPERIENCES = "GET_EXPERIENCES";
 export const CREATE_EXPERIENCE = "CREATE_EXPERIENCE";
 export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
 export const UPDATE_EXPERIENCE = "UPDATE_EXPERIENCE";
+
+export const GET_GROUP = "GET_GROUP";
+export const GET_GROUPS = "GET_GROUPS";
+export const GROUP_ERROR = "GROUP_ERROR";
+
+export const GET_PAGE = "GET_PAGE";
+export const GET_PAGES = "GET_PAGES";
+export const PAGE_ERROR = "PAGE_ERROR";

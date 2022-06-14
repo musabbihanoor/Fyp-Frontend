@@ -19,9 +19,7 @@ import {
 } from "@material-ui/core";
 import {
   AccountCircle,
-  Cancel,
   Edit,
-  Check,
   LocationCity,
   LocationOn,
   Home,
@@ -54,9 +52,6 @@ const ProfileSetting = ({
   updateExperience,
   deleteExperience,
 }) => {
-  const [image_set, setImage] = useState(null);
-  const [showImage, setShowImage] = useState("");
-  const [changeImage, setChangeImage] = useState(false);
   const [showEducation, setShowEducation] = useState(false);
   const [showExperience, setShowExperience] = useState(false);
   const [load, setLoading] = useState(false);
@@ -100,15 +95,6 @@ const ProfileSetting = ({
         setLoading(false);
       }
     });
-  };
-
-  const onImageSubmit = (e) => {
-    e.preventDefault();
-    const formdata = new FormData();
-    if (image_set !== null) {
-      formdata.append("profile_picture", image_set);
-    }
-    updateProfile(formdata, user.id);
   };
 
   useEffect(() => {
