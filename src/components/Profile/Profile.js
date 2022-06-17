@@ -30,6 +30,7 @@ import {
   acceptFriendRequest,
   createFriendRequest,
   cancelFriendRequest,
+  unfriend,
 } from "../../actions/profile";
 
 import ProfilePosts from "./ProfilePosts";
@@ -51,6 +52,7 @@ const Profile = ({
   createFriendRequest,
   acceptFriendRequest,
   cancelFriendRequest,
+  unfriend,
 }) => {
   const location = useLocation();
   const history = useHistory();
@@ -84,9 +86,9 @@ const Profile = ({
     updateProfile(formData, user.id).then((res) => {
       if (res.status === 400) {
         setError(
-          res.data.result.hatespeech
+          res.data.Text && res.data.Text.result.hatespeech
             ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
-            : res.data.result.islamophobia
+            : res.data.Text && res.data.Text.result.islamophobia
             ? "Your post contain islamophobia"
             : res.data.hijab
             ? "You can not post pictures without hijab"
@@ -103,7 +105,13 @@ const Profile = ({
     });
   };
 
-  const unfriend = () => {};
+  const unfriending = () => {
+    setLoading(true);
+    unfriend(profile.id).then((res) => {
+      setPop("unfriended");
+      setLoading(false);
+    });
+  };
 
   const acceptRequest = () => {
     setLoading(true);
@@ -403,7 +411,7 @@ const Profile = ({
                   <Settings /> Edit
                 </Button>
               ) : auth.user.friend_list.find((x) => x.id === profile.id) ? (
-                <Button variant="contained" onClick={() => unfriend()}>
+                <Button variant="contained" onClick={() => unfriending()}>
                   <Cancel /> Unfriend
                 </Button>
               ) : auth.user.request_list.find((x) => x.id === profile.id) ? (
@@ -542,6 +550,7 @@ Profile.propTypes = {
   createFriendRequest: PropTypes.func.isRequired,
   acceptFriendRequest: PropTypes.func.isRequired,
   cancelFriendRequest: PropTypes.func.isRequired,
+  unfriend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -557,4 +566,5 @@ export default connect(mapStateToProps, {
   createFriendRequest,
   acceptFriendRequest,
   cancelFriendRequest,
+  unfriend,
 })(withRouter(Profile));

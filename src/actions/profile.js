@@ -178,6 +178,26 @@ export const acceptFriendRequest = (id, action) => async (dispatch) => {
   }
 };
 
+// Unfriend
+export const unfriend = (id) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  } else {
+    return;
+  }
+
+  try {
+    const res = await axios.get(`${BASE_URL}/account/unfriend/${id}/`);
+
+    return res;
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.data, status: err.response.status },
+    });
+  }
+};
+
 // get educations
 export const getEducations = () => async (dispatch) => {
   if (localStorage.token) {
