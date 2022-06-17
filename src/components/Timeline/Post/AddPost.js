@@ -35,12 +35,12 @@ const AddPost = ({ createPost, user, setData, data }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // if (body === "") {
-    //   setErrText(true);
-    //   return;
-    // } else {
-    //   setErrText(false);
-    // }
+    if (body === "" && image_set === null) {
+      setErrText(true);
+      return;
+    } else {
+      setErrText(false);
+    }
 
     var quranic_ref = [];
     var hadees_ref = [];
