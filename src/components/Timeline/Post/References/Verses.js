@@ -268,8 +268,6 @@ const Item = ({ x, reference, searchEng, referencing }) => {
           .toLowerCase()
           .includes(searchEng.toLowerCase())) && (
         <>
-          {" "}
-          {console.log(x)}
           <div className="ref-item">
             <p>{x.AyahNumber + ". " + x.SaheehInternational}</p>
             <p style={{ textAlign: "end" }}>{x.Junagarhi}</p>

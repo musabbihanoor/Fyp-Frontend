@@ -110,7 +110,9 @@ const Navbar = ({
               size="large"
               aria-label="show 4 new mails"
               color="inherit">
-              <Badge badgeContent={user.request_list.length} color="error">
+              <Badge
+                badgeContent={user && user.request_list.length}
+                color="error">
                 <Group
                   color={nav === 2 ? "secondary" : "inherit"}
                   onClick={() => setNav(2)}
@@ -206,7 +208,7 @@ const Navbar = ({
                       color={nav === 2 ? "secondary" : "inherit"}
                       onClick={() => setNav(2)}>
                       <Badge
-                        badgeContent={user.request_list.length}
+                        badgeContent={user && user.request_list.length}
                         color="error">
                         <Group>{/* <a href='/timeline' /> */}</Group>{" "}
                       </Badge>
