@@ -96,7 +96,7 @@
   cursor: pointer;
 }
 
-.timeline .post .post-items {
+.post .post-items {
   color: #333434;
   position: relative;
 }
@@ -105,7 +105,7 @@
   width: 100%;
 }
 
-.timeline .post .post-items .visibility {
+.post .post-items .visibility {
   position: absolute;
   z-index: 11111;
   color: #fff;
@@ -117,12 +117,12 @@
   justify-content: center;
 }
 
-.timeline .post .post-items .visibility p {
+.post .post-items .visibility p {
   margin: 0 0 20px;
   padding: 0;
 }
 
-.timeline .post .post-items .visibility button {
+.post .post-items .visibility button {
   background-color: transparent;
   color: #fff;
   border: 2px solid #fff;
@@ -133,7 +133,7 @@
   transition: all 0.3s ease-in;
 }
 
-.timeline .post .post-items .visibility button:hover {
+.post .post-items .visibility button:hover {
   background-color: #fff;
   color: gray;
 }

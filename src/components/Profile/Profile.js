@@ -20,6 +20,7 @@ import {
 } from "@material-ui/icons";
 import Loading from "../Layout/Loading";
 import Confirm from "../Popup/Confirm";
+import Error from "../Popup/Error";
 
 import {
   getProfile,
@@ -65,6 +66,7 @@ const Profile = ({
   const [showMenu2, setShowMenu2] = useState(false);
   const [noImage, setNoImage] = useState(false);
   const [noCover, setNoCover] = useState(false);
+  const [error, setError] = useState("");
 
   const onCoverChange = (e) => {
     e.preventDefault();
@@ -78,7 +80,27 @@ const Profile = ({
     );
     var formData = new FormData();
     formData.append("cover_picture", e.target.files[0]);
-    updateProfile(formData, user.id);
+    formData.append("cover_picture2", e.target.files[0]);
+    updateProfile(formData, user.id).then((res) => {
+      if (res.status === 400) {
+        setError(
+          res.data.result.hatespeech
+            ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
+            : res.data.result.islamophobia
+            ? "Your post contain islamophobia"
+            : res.data.hijab
+            ? "You can not post pictures without hijab"
+            : res.data.info
+            ? "You can not post cover pictures with faces"
+            : res.data.violence_nudity && res.data.violence_nudity.nudity
+            ? "Your post contain nudity"
+            : "There's something wrong with your post",
+        );
+      }
+      if (res.status === 500 || res.status === 503) {
+        setError("The server isn't working");
+      }
+    });
   };
 
   const unfriend = () => {};
@@ -117,6 +139,7 @@ const Profile = ({
 
   const changeImage = (e) => {
     e.preventDefault();
+    setShowMenu1(false);
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setShowImage(
@@ -126,13 +149,33 @@ const Profile = ({
     );
     var formData = new FormData();
     formData.append("profile_picture", e.target.files[0]);
-    setShowMenu1(false);
-    updateProfile(formData, user.id).then((res) => {});
+    formData.append("profile_picture2", e.target.files[0]);
+    updateProfile(formData, user.id).then((res) => {
+      if (res.status === 400) {
+        setError(
+          res.data.result.hatespeech
+            ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
+            : res.data.result.islamophobia
+            ? "Your post contain islamophobia"
+            : res.data.hijab
+            ? "You can not post pictures without hijab"
+            : res.data.info
+            ? "You can not post pictures with multiple faces"
+            : res.data.violence_nudity && res.data.violence_nudity.nudity
+            ? "Your post contain nudity"
+            : "There's something wrong with your post",
+        );
+      }
+      if (res.status === 500 || res.status === 503) {
+        setError("The server isn't working");
+      }
+    });
   };
 
   const removeImage = (e) => {
     var formData = new FormData();
     formData.append("profile_picture", "");
+    formData.append("profile_picture2", "");
     updateProfile(formData, user.id);
     setNoImage(false);
     setShowMenu1(false);
@@ -144,6 +187,7 @@ const Profile = ({
   const removeCover = (e) => {
     var formData = new FormData();
     formData.append("cover_picture", "");
+    formData.append("cover_picture2", "");
     updateProfile(formData, user.id);
     setShowMenu2(false);
     setNoCover(false);
@@ -472,6 +516,16 @@ const Profile = ({
           heading="Do you want to remove cover picture?"
           accept={(e) => removeCover(e)}
           decline={() => setNoCover(false)}
+        />
+      )}
+
+      {error !== "" && (
+        <Error
+          func={() => {
+            setError("");
+            history.go();
+          }}
+          text={error}
         />
       )}
     </Fragment>
