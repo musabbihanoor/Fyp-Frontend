@@ -63,8 +63,10 @@ const Group = ({ auth: { isAuthenticated, loading } }) => {
                         alignItems: "center",
                       }}>
                       <GroupTwoTone />
-                      {group.members.length}{" "}
-                      {group.members.length > 1 ? "members" : "member"}
+                      {group.members && group.members.length}{" "}
+                      {group.members && group.members.length > 1
+                        ? "members"
+                        : "member"}
                     </Button>
                   </Grid>
                   <Grid item>

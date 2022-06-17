@@ -96,7 +96,8 @@ const SearchBar = ({ getProfiles, getProfile, getGroups }) => {
           {groups.length > 0 &&
             groups.map((x, i) => (
               <Link to={{ pathname: "/group", state: { group: x } }}>
-                {(x.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                {((x.name &&
+                  x.name.toLowerCase().includes(searchText.toLowerCase())) ||
                   (x.username &&
                     x.username
                       .toLowerCase()
