@@ -7,6 +7,8 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PostReference from "./References/PostReference";
 import Loading from "../../Layout/Loading";
 import Popup from "../../Popup/Popup";
+import Error from "../../Popup/Error";
+import Okay from "../../Popup/Okay";
 import {
   FileCopyTwoTone,
   SendTwoTone,
@@ -29,16 +31,16 @@ const AddPost = ({ createPost, user, setData, data }) => {
   const [load, setLoad] = useState(false);
   const [QuranReference, setQuranRef] = useState([]);
   const [AhadeesReference, setAhadeesRef] = useState([]);
-  // const [error, setError] = useState({});
+  const [error, setError] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (body === "") {
-      setErrText(true);
-      return;
-    } else {
-      setErrText(false);
-    }
+    // if (body === "") {
+    //   setErrText(true);
+    //   return;
+    // } else {
+    //   setErrText(false);
+    // }
 
     var quranic_ref = [];
     var hadees_ref = [];
@@ -51,6 +53,7 @@ const AddPost = ({ createPost, user, setData, data }) => {
     const formData = new FormData();
     formData.append("body", body);
     image_set !== null && formData.append("image_set", image_set);
+    image_set !== null && formData.append("image_set2", image_set);
     quranic_ref.length > 0 && formData.append("quranic_ref", quranic_ref);
     hadees_ref.length > 0 &&
       formData.append(
@@ -76,19 +79,24 @@ const AddPost = ({ createPost, user, setData, data }) => {
       }
 
       if (res.status === 400) {
-        console.log(res.data);
         setLoad(false);
-        setPop(
+        setError(
           res.data.result.hatespeech
             ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
             : res.data.result.islamophobia
             ? "Your post contain islamophobia"
+            : res.data.hijab
+            ? "You can not post pictures without hijab"
+            : res.data.violence_nudity && res.data.violence_nudity.nudity
+            ? "Your post contain nudity"
             : "There's something wrong with your post",
         );
-        // setError(res.data);
+      }
+      if (res.status === 500 || res.status === 503) {
+        setLoad(false);
+        setError("The server isn't working");
       }
     });
-    // });
   };
 
   return (
@@ -108,6 +116,7 @@ const AddPost = ({ createPost, user, setData, data }) => {
         </Link>
         <form>
           <TextareaAutosize
+            onFocus={() => setErrText(false)}
             placeholder="What's on your mind"
             name="body"
             value={body}
@@ -207,7 +216,9 @@ const AddPost = ({ createPost, user, setData, data }) => {
           setAhadeesRef={setAhadeesRef}
         />
       )}
-      {pop !== "" && <Popup func={() => setPop("")} heading={pop} />}
+      {/* {pop !== "" && <Popup func={() => setPop("")} heading={pop} />} */}
+      {pop !== "" && <Okay func={() => setPop("")} text={pop} />}
+      {error !== "" && <Error func={() => setError("")} text={error} />}
       {load && <Loading />}
     </div>
   );
