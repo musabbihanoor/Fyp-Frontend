@@ -18,7 +18,7 @@ import PostDisplay from "./PostDisplay";
 import Confirm from "../../Popup/Confirm";
 import Moment from "react-moment";
 import { Button, Menu, MenuItem } from "@material-ui/core";
-import { MoreVert } from "@material-ui/icons";
+import { MoreVert, VisibilityOff } from "@material-ui/icons";
 import axios from "axios";
 import Popup from "../../Popup/Popup";
 // import Loading from "../../Layout/Loading";
@@ -32,6 +32,7 @@ const Post = ({
     last_modified,
     hadees_ref,
     quranic_ref,
+    violence,
   },
   auth: { user },
   post,
@@ -61,12 +62,12 @@ const Post = ({
   const [displayPost, setDisplayPost] = useState(false);
   const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
-  // const [translate, setTranslate] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [QuranRef, setQuranRef] = useState([]);
   const [AhadeesRef, setAhadeesRef] = useState([]);
   const [popQuran, setPopQuran] = useState(null);
   const [popHadees, setPopHadees] = useState(null);
+  const [blur, setBlur] = useState(violence);
 
   const fetchVerseRef = async () => {
     const dataQuran = [];
@@ -268,11 +269,22 @@ const Post = ({
             </div>
 
             {image_set && (
-              <img
-                alt="profile"
-                src={image_set}
-                className="cursor-pointer"
-                onClick={() => setDisplayPost(true)}></img>
+              <>
+                {blur && (
+                  <div className="visibility">
+                    <VisibilityOff style={{ fontSize: 55, marginBottom: 20 }} />
+                    <p>This post contain violence.</p>
+                    <p>View at your own risk</p>
+                    <button onClick={() => setBlur(false)}>See Post</button>
+                  </div>
+                )}
+                <img
+                  alt="profile"
+                  style={{ filter: blur && "blur(8px)" }}
+                  src={image_set}
+                  className="cursor-pointer"
+                  onClick={() => !blur && setDisplayPost(true)}></img>
+              </>
             )}
           </div>
         </div>

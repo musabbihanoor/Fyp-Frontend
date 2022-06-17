@@ -98,10 +98,44 @@
 
 .timeline .post .post-items {
   color: #333434;
+  position: relative;
 }
 
 .timeline .post .post-items img {
   width: 100%;
+}
+
+.timeline .post .post-items .visibility {
+  position: absolute;
+  z-index: 11111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.timeline .post .post-items .visibility p {
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.timeline .post .post-items .visibility button {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.3s ease-in;
+}
+
+.timeline .post .post-items .visibility button:hover {
+  background-color: #fff;
+  color: gray;
 }
 
 .timeline .post .post-items p {

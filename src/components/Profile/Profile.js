@@ -117,7 +117,6 @@ const Profile = ({
 
   const changeImage = (e) => {
     e.preventDefault();
-
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setShowImage(
@@ -128,7 +127,7 @@ const Profile = ({
     var formData = new FormData();
     formData.append("profile_picture", e.target.files[0]);
     setShowMenu1(false);
-    updateProfile(formData, user.id);
+    updateProfile(formData, user.id).then((res) => {});
   };
 
   const removeImage = (e) => {
