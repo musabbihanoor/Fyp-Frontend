@@ -262,10 +262,14 @@ const Item = ({ x, reference, searchEng, referencing }) => {
     <Fragment>
       {/* {console.log(x)} */}
       {(x.SaheehInternational.toLowerCase().includes(searchEng.toLowerCase()) ||
+        x.Junagarhi.includes(searchEng) ||
+        x.AyahTextQalam.includes(searchEng) ||
         x.AyahNumber.toString()
           .toLowerCase()
           .includes(searchEng.toLowerCase())) && (
         <>
+          {" "}
+          {console.log(x)}
           <div className="ref-item">
             <p>{x.AyahNumber + ". " + x.SaheehInternational}</p>
             <p style={{ textAlign: "end" }}>{x.Junagarhi}</p>

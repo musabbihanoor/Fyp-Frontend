@@ -173,10 +173,16 @@ const Ahadees = ({ reference, setRef, setShowOption }) => {
               type="text"
               onChange={(e) => setSearchText2(e.target.value)}
               value={searchText2}
+              dir={switchLang && "rtl"}
+              onKeyPress={() => switchLang && convert()}
             />
             <button onClick={(e) => e.preventDefault()}>
               <i className="fas fa-search"></i>
             </button>
+            <Switch onChange={(e) => setSwitchLang(e.target.checked)} />
+            <label style={{ color: switchLang ? "#F50057" : "#9F9F9F" }}>
+              Arabic
+            </label>
           </form>
         </>
       )}
@@ -218,11 +224,14 @@ const Hadees = ({ x, reference, setRef, searchText2 }) => {
 
   return (
     <Fragment>
-      {x.English.toLowerCase().includes(searchText2.toLowerCase()) && (
+      {(x.English.toLowerCase().includes(searchText2.toLowerCase()) ||
+        x.Arabic.includes(searchText2) ||
+        x.Urdu.includes(searchText2)) && (
         <>
           <div className="ref-item">
             <p>{x.English}</p>
             <p>{x.Arabic}</p>
+            <p>{x.Urdu}</p>
             <h6>
               {x.HadithNumber}, {x.BookName}, {x.Sanad}
             </h6>
