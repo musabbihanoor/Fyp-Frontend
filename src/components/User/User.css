@@ -182,7 +182,7 @@ input.verify.cnic {
 
 .verify .img img {
   width: 400px;
-  height: 100%;
+  height: 240px;
   object-fit: cover;
   border-radius: 10px;
 }

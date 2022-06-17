@@ -17,6 +17,7 @@ import {
   Cancel,
   FiberManualRecord,
   AddAPhoto,
+  VerifiedUser,
 } from "@material-ui/icons";
 import Loading from "../Layout/Loading";
 import Confirm from "../Popup/Confirm";
@@ -87,7 +88,7 @@ const Profile = ({
       if (res.status === 400) {
         setError(
           res.data.Text && res.data.Text.result.hatespeech
-            ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
+            ? `Your post contain hatespeech "${res.data.Text.result.hatespeech}"`
             : res.data.Text && res.data.Text.result.islamophobia
             ? "Your post contain islamophobia"
             : res.data.hijab
@@ -161,9 +162,9 @@ const Profile = ({
     updateProfile(formData, user.id).then((res) => {
       if (res.status === 400) {
         setError(
-          res.data.result.hatespeech
-            ? `Your post contain hatespeech "${res.data.result.hatespeech}"`
-            : res.data.result.islamophobia
+          res.data.Text && res.data.Text.result.hatespeech
+            ? `Your post contain hatespeech "${res.data.Text.result.hatespeech}"`
+            : res.data.Text && res.data.Text.result.islamophobia
             ? "Your post contain islamophobia"
             : res.data.hijab
             ? "You can not post pictures without hijab"
@@ -347,6 +348,9 @@ const Profile = ({
             <Grid item>
               <div>
                 <h2 className="name">
+                  {profile.id_verified && (
+                    <VerifiedUser style={{ color: "lightgreen" }} />
+                  )}
                   {profile.name}
                   {auth.user.friend_list.find((x) => x.id === profile.id) && (
                     <>

@@ -89,6 +89,10 @@ const AddPost = ({ createPost, user, setData, data }) => {
             ? "You can not post pictures without hijab"
             : res.data.violence_nudity && res.data.violence_nudity.nudity
             ? "Your post contain nudity"
+            : res.data.Text && res.data.Text.result.hatespeech
+            ? `Your post contain hatespeech "${res.data.Text.result.hatespeech}"`
+            : res.data.Text && res.data.Text.result.islamophobia
+            ? "Your post contain islamophobia"
             : "There's something wrong with your post",
         );
       }

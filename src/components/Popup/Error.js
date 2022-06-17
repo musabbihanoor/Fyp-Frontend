@@ -1,7 +1,7 @@
 import React from "react";
 import { Warning } from "@material-ui/icons";
 
-const Error = ({ func, text }) => {
+const Error = ({ func, text, instructions }) => {
   return (
     <div className="absolute">
       <div className="absolute-content popup error">
@@ -11,6 +11,7 @@ const Error = ({ func, text }) => {
 
         <h1 style={{ color: "gray", fontSize: 24 }}>Oh snap!</h1>
         <p style={{ color: "gray", fontSize: 20 }}>{text}</p>
+        {instructions && instructions.map((x, i) => <p key={i}>{x}</p>)}
         <div>
           <button onClick={func}>Dismiss</button>
         </div>

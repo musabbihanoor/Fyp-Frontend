@@ -150,7 +150,6 @@ export const verifyId = (data) => async (dispatch) => {
   } else {
     return;
   }
-
   try {
     const config = {
       headers: {
@@ -163,21 +162,9 @@ export const verifyId = (data) => async (dispatch) => {
       data,
       config,
     );
-
     dispatch(loadUser());
-
-    // dispatch({
-    //   type: UPDATE_PROFILE,
-    //   payload: res.data,
-    // });
-
     return res;
   } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: err.response.data,
-    });
-    console.log(err);
     return err.response;
   }
 };
