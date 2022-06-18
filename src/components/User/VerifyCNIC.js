@@ -16,7 +16,7 @@ const VerifyCNIC = ({
   profile,
   verifyId,
 }) => {
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [front, setFront] = useState(null);
   const [back, setBack] = useState(null);
@@ -34,8 +34,11 @@ const VerifyCNIC = ({
       history.push("/timeline");
     }
 
+    if(user && user.name) {
+      setName(user.name)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, loading, id_verified]);
+  }, [isAuthenticated, loading, id_verified, user]);
 
   const onSubmit = (e) => {
     e.preventDefault();
