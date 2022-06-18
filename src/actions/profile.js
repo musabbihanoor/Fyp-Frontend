@@ -14,6 +14,11 @@ import {
   UPDATE_EXPERIENCE,
   USER_LOADED,
   AUTH_ERROR,
+  FRIEND_REQUEST_ACCEPTED,
+  FRIEND_REQUEST_DECLINED,
+  FRIEND_REQUEST_SENT,
+  FRIEND_REQUEST_DELETED,
+  UNFRIENDED,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import { BASE_URL } from "./url";
@@ -126,6 +131,10 @@ export const createFriendRequest = (id) => async (dispatch) => {
 
   try {
     const res = await axios.get(`${BASE_URL}/account/send_request/${id}/`);
+    dispatch({
+      type: FRIEND_REQUEST_SENT,
+      payload: res.data,
+    });
 
     return res;
   } catch (err) {
@@ -147,6 +156,11 @@ export const cancelFriendRequest = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/account/cancel_request/${id}/`);
 
+    dispatch({
+      type: FRIEND_REQUEST_DELETED,
+      payload: res.data,
+    });
+
     return res;
   } catch (err) {
     dispatch({
@@ -157,7 +171,7 @@ export const cancelFriendRequest = (id) => async (dispatch) => {
 };
 
 // Accept friend request
-export const acceptFriendRequest = (id, action) => async (dispatch) => {
+export const acceptFriendRequest = (data, action) => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   } else {
@@ -166,14 +180,28 @@ export const acceptFriendRequest = (id, action) => async (dispatch) => {
 
   try {
     const res = await axios.get(
-      `${BASE_URL}/account/accept_request/${id}/${action}`,
+      `${BASE_URL}/account/accept_request/${data.id}/${action}`,
     );
+
+    if (action === "accept") {
+      dispatch({
+        type: FRIEND_REQUEST_ACCEPTED,
+        payload: data,
+      });
+    }
+
+    if (action === "reject") {
+      dispatch({
+        type: FRIEND_REQUEST_DECLINED,
+        payload: data.id,
+      });
+    }
 
     return res;
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.data, status: err.response.status },
+      payload: err.reponse,
     });
   }
 };
@@ -188,6 +216,11 @@ export const unfriend = (id) => async (dispatch) => {
 
   try {
     const res = await axios.get(`${BASE_URL}/account/unfriend/${id}/`);
+
+    dispatch({
+      type: UNFRIENDED,
+      payload: id,
+    });
 
     return res;
   } catch (err) {

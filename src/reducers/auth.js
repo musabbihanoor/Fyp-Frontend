@@ -6,6 +6,9 @@ import {
   AUTH_ERROR,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  FRIEND_REQUEST_ACCEPTED,
+  FRIEND_REQUEST_DECLINED,
+  UNFRIENDED,
 } from "../actions/types";
 
 const initialState = {
@@ -73,6 +76,33 @@ export default function auth(state = initialState, action) {
         loading: false,
         user: null,
         verified: false,
+      };
+
+    case UNFRIENDED:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          friend_list: state.user.friend_list.filter((x) => x.id !== payload),
+        },
+      };
+
+    case FRIEND_REQUEST_ACCEPTED:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          friend_list: [...state.user.friend_list, payload],
+        },
+      };
+
+    case FRIEND_REQUEST_DECLINED:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          request_list: state.user.request_list.filter((x) => x.id !== payload),
+        },
       };
 
     default:

@@ -6,7 +6,6 @@ import { createPost } from "../../../actions/post";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PostReference from "./References/PostReference";
 import Loading from "../../Layout/Loading";
-import Popup from "../../Popup/Popup";
 import Error from "../../Popup/Error";
 import Okay from "../../Popup/Okay";
 import {

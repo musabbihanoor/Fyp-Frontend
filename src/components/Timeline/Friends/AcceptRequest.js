@@ -44,7 +44,7 @@ const AcceptRequest = ({
               color="primary"
               style={{ marginRight: 5 }}
               onClick={() => {
-                acceptFriendRequest(id, "accept");
+                acceptFriendRequest(profile, "accept");
                 setShow(false);
               }}>
               <Check />
@@ -55,7 +55,7 @@ const AcceptRequest = ({
               variant="outlined"
               color="secondary"
               onClick={() => {
-                acceptFriendRequest(id, "reject");
+                acceptFriendRequest(profile, "reject");
                 setShow(false);
               }}>
               <CancelOutlined />

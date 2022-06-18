@@ -12,6 +12,8 @@ import {
   CREATE_EXPERIENCE,
   UPDATE_EXPERIENCE,
   DELETE_EXPERIENCE,
+  // FRIEND_REQUEST_SENT,
+  // FRIEND_REQUEST_DELETED,
 } from "../actions/types";
 
 const initialState = {
@@ -117,6 +119,7 @@ export default function profile(state = initialState, action) {
         error: {},
       };
     }
+
     default:
       return state;
   }

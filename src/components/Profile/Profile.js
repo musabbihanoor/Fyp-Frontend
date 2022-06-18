@@ -106,46 +106,6 @@ const Profile = ({
     });
   };
 
-  const unfriending = () => {
-    setLoading(true);
-    unfriend(profile.id).then((res) => {
-      setPop("unfriended");
-      setLoading(false);
-    });
-  };
-
-  const acceptRequest = () => {
-    setLoading(true);
-    acceptFriendRequest(profile.id, "accept").then((res) => {
-      setPop("Friend Request Accepted");
-      setLoading(false);
-    });
-  };
-
-  const rejectRequest = () => {
-    setLoading(true);
-    acceptFriendRequest(profile.id, "reject").then((res) => {
-      setPop("Friend Request Rejected");
-      setLoading(false);
-    });
-  };
-
-  const cancelRequest = () => {
-    setLoading(true);
-    cancelFriendRequest(profile.id).then((res) => {
-      setPop("Friend Request Cancelled");
-      setLoading(false);
-    });
-  };
-
-  const addFriend = async () => {
-    setLoading(true);
-    createFriendRequest(profile.id).then((res) => {
-      setPop("Friend Request Sent");
-      setLoading(false);
-    });
-  };
-
   const changeImage = (e) => {
     e.preventDefault();
     setShowMenu1(false);
@@ -407,49 +367,16 @@ const Profile = ({
                 </Grid>
               </div>
             </Grid>
-            <Grid
-              item
-              style={{ alignSelf: "flex-end", margin: "0 0 10px 200px" }}>
-              {profile.id === auth.user.id ? (
-                <Button href="/profile/setting" variant="contained">
-                  <Settings /> Edit
-                </Button>
-              ) : auth.user.friend_list.find((x) => x.id === profile.id) ? (
-                <Button variant="contained" onClick={() => unfriending()}>
-                  <Cancel /> Unfriend
-                </Button>
-              ) : auth.user.request_list.find((x) => x.id === profile.id) ? (
-                <>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => acceptRequest()}>
-                    Accept Request
-                  </Button>
-                  <Button
-                    style={{ marginLeft: 10 }}
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => rejectRequest()}>
-                    Reject Request
-                  </Button>
-                </>
-              ) : profile.request_list.find((x) => x.id === auth.user.id) ? (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => cancelRequest()}>
-                  Cancel Request
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => addFriend()}>
-                  Add Friend
-                </Button>
-              )}
-            </Grid>
+
+            <UserStatus
+              profile={profile}
+              auth={auth}
+              setPop={setPop}
+              createFriendRequest={createFriendRequest}
+              acceptFriendRequest={acceptFriendRequest}
+              cancelFriendRequest={cancelFriendRequest}
+              unfriend={unfriend}
+            />
           </Grid>
 
           <div className="nav">
@@ -510,7 +437,6 @@ const Profile = ({
         <Popup
           func={() => {
             setPop("");
-            history.go();
           }}
           heading={pop}
         />
@@ -572,3 +498,105 @@ export default connect(mapStateToProps, {
   cancelFriendRequest,
   unfriend,
 })(withRouter(Profile));
+
+const UserStatus = ({
+  profile,
+  auth,
+  setPop,
+  createFriendRequest,
+  acceptFriendRequest,
+  cancelFriendRequest,
+  unfriend,
+}) => {
+  const [status, setStatus] = useState("");
+
+  const unfriending = () => {
+    setStatus("add");
+    unfriend(profile.id).then((res) => {
+      setPop("unfriended");
+    });
+  };
+
+  const acceptRequest = () => {
+    setStatus("unfriend");
+    acceptFriendRequest(profile, "accept").then((res) => {
+      setPop("Friend Request Accepted");
+    });
+  };
+
+  const rejectRequest = () => {
+    setStatus("add");
+    acceptFriendRequest(profile, "reject").then((res) => {
+      setPop("Friend Request Rejected");
+    });
+  };
+
+  const cancelRequest = () => {
+    setStatus("add");
+    cancelFriendRequest(profile.id).then((res) => {
+      setPop("Friend Request Cancelled");
+    });
+  };
+
+  const addFriend = async () => {
+    setStatus("cancel");
+    createFriendRequest(profile.id).then((res) => {
+      setPop("Friend Request Sent");
+    });
+  };
+
+  useEffect(() => {
+    profile.id === auth.user.id
+      ? setStatus("edit")
+      : auth.user.friend_list.find((x) => x.id === profile.id)
+      ? setStatus("unfriend")
+      : auth.user.request_list.find((x) => x.id === profile.id)
+      ? setStatus("accept")
+      : profile.request_list.find((x) => x.id === auth.user.id)
+      ? setStatus("cancel")
+      : setStatus("add");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <Grid item style={{ alignSelf: "flex-end", margin: "0 0 10px 200px" }}>
+      {status === "edit" ? (
+        <Button href="/profile/setting" variant="contained">
+          <Settings /> Edit
+        </Button>
+      ) : status === "unfriend" ? (
+        <Button variant="contained" onClick={() => unfriending()}>
+          <Cancel /> Unfriend
+        </Button>
+      ) : status === "accept" ? (
+        <>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => acceptRequest()}>
+            Accept Request
+          </Button>
+          <Button
+            style={{ marginLeft: 10 }}
+            variant="outlined"
+            color="secondary"
+            onClick={() => rejectRequest()}>
+            Reject Request
+          </Button>
+        </>
+      ) : status === "cancel" ? (
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => cancelRequest()}>
+          Cancel Request
+        </Button>
+      ) : (
+        <Button variant="contained" color="primary" onClick={() => addFriend()}>
+          Add Friend
+        </Button>
+      )}
+    </Grid>
+  );
+};
