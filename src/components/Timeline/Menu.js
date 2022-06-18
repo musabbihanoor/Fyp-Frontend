@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   List,
@@ -16,6 +16,9 @@ import {
 } from "@material-ui/icons";
 
 const Menu = ({ user, setNav }) => {
+  const [msg1, setMsg1] = useState(false);
+  const [msg2, setMsg2] = useState(false);
+
   return (
     <div className="timeline-menu">
       <List>
@@ -45,36 +48,60 @@ const Menu = ({ user, setNav }) => {
           </button>
         </ListItem>
         <ListItem>
-          <button>
+          <button
+            style={{ cursor: "default" }}
+            onMouseEnter={() => setMsg1(true)}
+            onMouseLeave={() => setMsg1(false)}>
             <ListItemIcon>
               <WorkOutlineTwoTone style={{ color: "#59CCBD" }} />
             </ListItemIcon>
-            <ListItemText>Groups</ListItemText>
+            <ListItemText>
+              Groups{" "}
+              {msg1 && (
+                <span style={{ fontSize: 12, color: "grey" }}>
+                  *coming soon
+                </span>
+              )}
+            </ListItemText>
           </button>
         </ListItem>
         <ListItem>
-          <button>
-            <ListItemIcon>
-              <AccessTimeTwoTone style={{ color: "#B230AB" }} />
-            </ListItemIcon>
-            <ListItemText>Account</ListItemText>
-          </button>
+          <Link to={{ pathname: "/profile", state: { user: user } }}>
+            <button>
+              <ListItemIcon>
+                <AccessTimeTwoTone style={{ color: "#B230AB" }} />
+              </ListItemIcon>
+              <ListItemText>Account</ListItemText>
+            </button>
+          </Link>
         </ListItem>
         <ListItem>
-          <button>
+          <button
+            style={{ cursor: "default" }}
+            onMouseEnter={() => setMsg2(true)}
+            onMouseLeave={() => setMsg2(false)}>
             <ListItemIcon>
               <MessageTwoTone style={{ color: "#E96D2B" }} />
             </ListItemIcon>
-            <ListItemText>Message</ListItemText>
+            <ListItemText>
+              Message{" "}
+              {msg2 && (
+                <span style={{ fontSize: 12, color: "grey" }}>
+                  *coming soon
+                </span>
+              )}
+            </ListItemText>
           </button>
         </ListItem>
         <ListItem>
-          <button>
-            <ListItemIcon>
-              <SettingsTwoTone style={{ color: "#E8B12D" }} />
-            </ListItemIcon>
-            <ListItemText>Settings</ListItemText>
-          </button>
+          <Link to="/profile/setting">
+            <button>
+              <ListItemIcon>
+                <SettingsTwoTone style={{ color: "#E8B12D" }} />
+              </ListItemIcon>
+              <ListItemText>Settings</ListItemText>
+            </button>
+          </Link>
         </ListItem>
       </List>
     </div>

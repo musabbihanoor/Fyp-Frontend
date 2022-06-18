@@ -9,7 +9,6 @@ import {
   FlagTwoTone,
   DnsTwoTone,
 } from "@material-ui/icons";
-import { Grid } from "@material-ui/core";
 import moment from "moment";
 
 const ProfileAbout = ({
@@ -142,90 +141,6 @@ const ProfileAbout = ({
             )}
           </div>
         </span>
-      </div>
-
-      <div className="profile-friends">
-        <h3>Groups</h3>
-        <Grid container>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Group Name</p>
-          </Grid>
-        </Grid>
-      </div>
-
-      <div className="profile-friends">
-        <h3>Liked</h3>
-        <Grid container>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-          <Grid item xs={2} className="item">
-            <img
-              alt="display"
-              src="https://monstar-lab.com/global/wp-content/uploads/sites/11/2019/04/male-placeholder-image.jpeg"></img>
-            <p>Page Name</p>
-          </Grid>
-        </Grid>
       </div>
     </div>
   );

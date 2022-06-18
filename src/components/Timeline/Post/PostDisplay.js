@@ -265,6 +265,7 @@ const PostDisplay = ({
                     user={user}
                     getProfile={getProfile}
                     setLoading={setLoad}
+                    setDisplayPost={setDisplayPost}
                   />
                 ))}
             </div>

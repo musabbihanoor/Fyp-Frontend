@@ -11,7 +11,6 @@ import VerifyEmail from "./components/User/VerifyEmail";
 import Group from "./components/Groups/Group";
 import Page from "./components/Page/Page";
 import VerifyCNIC from "./components/User/VerifyCNIC";
-
 import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/auth";

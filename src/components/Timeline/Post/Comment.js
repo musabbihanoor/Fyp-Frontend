@@ -2,17 +2,20 @@ import React, { Fragment } from "react";
 import Loading from "../../Layout/Loading";
 import { Delete } from "@material-ui/icons";
 
-const Comment = ({ comment, deleteComment, user, getProfile, setLoading }) => {
+const Comment = ({
+  comment,
+  deleteComment,
+  user,
+  getProfile,
+  setLoading,
+  setDisplayPost,
+}) => {
   return (
     <Fragment>
       {comment ? (
         <div className="comment">
           <div className="user-info">
             <img
-              onClick={() => {
-                setLoading(true);
-                getProfile(user.id).then((res) => setLoading(false));
-              }}
               alt="profile"
               src={
                 comment.profile.profile_picture
