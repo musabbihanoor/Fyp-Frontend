@@ -16,7 +16,7 @@ const VerifyCNIC = ({
   profile,
   verifyId,
 }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(user.name);
   const [id, setId] = useState("");
   const [front, setFront] = useState(null);
   const [back, setBack] = useState(null);
@@ -74,6 +74,7 @@ const VerifyCNIC = ({
               className="verify cnic"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              readOnly
             />
 
             <p>Password</p>

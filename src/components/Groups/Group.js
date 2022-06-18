@@ -35,9 +35,9 @@ const Group = ({ auth: { isAuthenticated, loading } }) => {
               objectFit: "cover",
             }}
             alt="cover"
-            src={
-              "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png"
-            }
+            src=
+             {group.cover_picture ? group.cover_picture : "https://icsb.org/wp-content/uploads/membership-profile-uploads/profile_image_placeholder.png"}
+            
           />
 
           <Grid container justifyContent="center" className="profile-head">
